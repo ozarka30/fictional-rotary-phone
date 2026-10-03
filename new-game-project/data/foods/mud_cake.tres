@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FoodDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/food_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"mud_cake"
+name = "Mud cake"
+cost = 5
+affinity_deltas = Dictionary[int, float]({4: 15.0})
+potential_deltas = Dictionary[int, float]({2: 10.0})
