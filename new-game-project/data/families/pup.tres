@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FamilyDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/family_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"pup"
+name = "Pup"
+form_names = Dictionary[int, String]({0: "Pup", 1: "Cinderpup", 2: "Frostpup", 3: "Budpup", 4: "Claypup", 5: "Tidepup"})

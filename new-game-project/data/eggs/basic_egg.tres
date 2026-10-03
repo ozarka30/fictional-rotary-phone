@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EggDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/egg_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"basic_egg"
+name = "Basic egg"
+grade = 0
+malleable_days = 3
+family_id = &"pup"
+cost = 10
