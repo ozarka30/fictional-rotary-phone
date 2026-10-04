@@ -1,3 +1,4 @@
+@tool
 class_name ActiveRequest extends Resource
 
 @export var def: RequestDef

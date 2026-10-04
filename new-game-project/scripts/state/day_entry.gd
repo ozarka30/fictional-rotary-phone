@@ -1,3 +1,4 @@
+@tool
 class_name DayEntry extends Resource
 
 @export var day: int

@@ -2,9 +2,13 @@ extends Node
 ## Walks customers in to the desk on arrival and return days, and back out.
 
 @export var customer_scene: PackedScene
-@export var entrance: Node3D
-@export var desk: Node3D
-@export var customers_root: Node3D  # World/Customers
+@export var entrance_path := NodePath("../World/Entrance")
+@export var desk_path := NodePath("../World/CustomerSpot")
+@export var customers_root_path := NodePath("../World/Customers")
+
+@onready var entrance: Node3D = get_node(entrance_path)
+@onready var desk: Node3D = get_node(desk_path)
+@onready var customers_root: Node3D = get_node(customers_root_path)
 
 var _returns := {}  # day -> Array[Resource] (requests coming back that day)
 

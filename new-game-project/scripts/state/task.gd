@@ -1,3 +1,4 @@
+@tool
 class_name Task extends Resource
 ## One unit of avatar work. The thing that builds the task (a TaskProvider)
 ## fills in what to check and what to do; workers just walk, wait, and apply.

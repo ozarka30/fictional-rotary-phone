@@ -24,6 +24,5 @@ func test_hunter_request_loads() -> void:
 	var req: RequestDef = load("res://data/requests/hunter_tracker.tres")
 	assert_eq(req.min_stats[Types.Stat.KNACK], Types.Grade.C)
 	assert_eq(req.egg.malleable_days, 3)
-	# ponytail: dialog lines read empty here (editor placeholder for non-@tool scripts); verified in-game instead
-	assert_eq(req.intro_dialog.speaker, "Hunter")
+	assert_eq(req.intro_dialog.lines.size(), 4)  # defs are @tool so the editor keeps real values
 

@@ -1,3 +1,4 @@
+@tool
 class_name FamilyDef extends Resource
 ## One base creature. Its form is picked by its strongest affinity at stabilization.
 

@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="RequestDef" format=3]
+[gd_resource type="Resource" script_class="RequestDef" format=3 uid="uid://ueh7qjlw4t2t"]
 
-[ext_resource type="Script" path="res://scripts/defs/request_def.gd" id="1"]
+[ext_resource type="Script" uid="uid://d2csub05n7578" path="res://scripts/defs/request_def.gd" id="1"]
 [ext_resource type="Resource" path="res://data/eggs/basic_egg.tres" id="2"]
-[ext_resource type="Resource" path="res://data/dialog/hunter_intro.tres" id="3"]
+[ext_resource type="Resource" uid="uid://b6vn7mqres453" path="res://data/dialog/hunter_intro.tres" id="3"]
 [ext_resource type="Resource" path="res://data/dialog/hunter_return.tres" id="4"]
 
 [resource]
@@ -10,11 +10,16 @@ script = ExtResource("1")
 id = &"hunter_tracker"
 customer_name = "Hunter"
 summary = "A tracker for hunting: C Knack and some Tide."
-min_stats = Dictionary[int, int]({5: 2})
-min_affinities = Dictionary[int, int]({5: 1})
+min_stats = Dictionary[int, int]({
+5: 2
+})
+min_affinities = Dictionary[int, int]({
+5: 1
+})
 egg = ExtResource("2")
-return_after_days = 5
 reward_coin = 50
-reward_materials = Dictionary[StringName, int]({&"tidestone": 1})
+reward_materials = Dictionary[StringName, int]({
+&"tidestone": 1
+})
 intro_dialog = ExtResource("3")
 return_dialog = ExtResource("4")
