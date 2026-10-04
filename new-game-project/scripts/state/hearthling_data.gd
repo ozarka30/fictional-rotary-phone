@@ -1,3 +1,4 @@
+@tool
 class_name HearthlingData extends Resource
 ## Everything about one Hearthling. Plain data; rules and components change it.
 

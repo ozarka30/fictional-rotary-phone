@@ -1,3 +1,4 @@
+@tool
 class_name DialogDef extends Resource
 
 @export var id: StringName

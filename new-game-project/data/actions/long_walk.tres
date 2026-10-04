@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="ActionDef" format=3]
+[gd_resource type="Resource" script_class="ActionDef" format=3 uid="uid://b66upqpjd8kkp"]
 
-[ext_resource type="Script" path="res://scripts/defs/action_def.gd" id="1"]
+[ext_resource type="Script" uid="uid://beojubohw16pv" path="res://scripts/defs/action_def.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
 id = &"long_walk"
 name = "Long walk"
-stat_deltas = Dictionary[int, float]({2: 8.0})
+stat_deltas = Dictionary[int, float]({
+2: 8.0
+})

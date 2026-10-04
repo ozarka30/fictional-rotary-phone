@@ -1,3 +1,4 @@
+@tool
 class_name RequestDef extends Resource
 ## What a customer wants. Every listed minimum must be met; fit grade comes from the margins.
 

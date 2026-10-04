@@ -1,3 +1,4 @@
+@tool
 class_name FoodDef extends Resource
 
 @export var id: StringName

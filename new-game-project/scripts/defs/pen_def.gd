@@ -1,3 +1,4 @@
+@tool
 class_name PenDef extends Resource
 
 @export var id: StringName
