@@ -6,6 +6,5 @@
 script = ExtResource("1")
 id = &"long_walk"
 name = "Long walk"
-stat_deltas = Dictionary[int, float]({
-2: 8.0
-})
+potential_deltas = Dictionary[int, float]({2: 5.0})
+stat_deltas = Dictionary[int, float]({2: 6.0, 4: 2.0})

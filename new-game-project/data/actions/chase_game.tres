@@ -6,4 +6,5 @@
 script = ExtResource("1")
 id = &"chase_game"
 name = "Chase game"
-stat_deltas = Dictionary[int, float]({1: 8.0})
+potential_deltas = Dictionary[int, float]({1: 5.0})
+stat_deltas = Dictionary[int, float]({1: 6.0, 0: 2.0})

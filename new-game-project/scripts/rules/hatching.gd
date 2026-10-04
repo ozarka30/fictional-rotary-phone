@@ -8,6 +8,7 @@ static func hatch(egg: EggDef, family: FamilyDef, uid: int) -> HearthlingData:
 	h.egg = egg
 	h.family_id = family.id
 	h.quality = egg.grade
+	h.pen_id = &"basic_pen"  # ponytail: one pen station for now
 	h.malleable_days_left = egg.malleable_days
 	for s in Types.Stat.values():
 		h.stats[s] = family.base_stat

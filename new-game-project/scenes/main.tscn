@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://jroq7mktbybn" path="res://scripts/managers/tutorial_director.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://bf3j2eg7spk47" path="res://scenes/world/shop_room.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" path="res://scenes/ui/shaping_panel.tscn" id="10_choun"]
 
 [node name="Main" type="Node" unique_id=798902203]
 
@@ -38,3 +39,5 @@ script = ExtResource("6")
 [node name="HUD" parent="UI" unique_id=1527152589 instance=ExtResource("8_tipki")]
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ShapingPanel" parent="UI" unique_id=895006773 instance=ExtResource("10_choun")]

@@ -2,6 +2,11 @@
 
 [ext_resource type="SpriteFrames" path="res://addons/duelyst_animated_sprites/spriteframes/units/neutral_xho.tres" id="1"]
 [ext_resource type="Script" path="res://components/hearthling/hearthling_state_component.gd" id="2"]
+[ext_resource type="Script" path="res://components/hearthling/shaping_component.gd" id="3"]
+[ext_resource type="Script" path="res://components/shared/clickable_component.gd" id="4"]
+
+[sub_resource type="BoxShape3D" id="shape"]
+size = Vector3(0.9, 1.2, 0.6)
 
 [node name="Hearthling" type="Node3D" groups=["hearthling"]]
 
@@ -17,3 +22,14 @@ autoplay = "breathing"
 
 [node name="State" type="Node" parent="."]
 script = ExtResource("2")
+
+[node name="Shaping" type="Node" parent="."]
+script = ExtResource("3")
+
+[node name="Clickable" type="Area3D" parent="."]
+script = ExtResource("4")
+panel_id = &"ShapingPanel"
+
+[node name="Shape" type="CollisionShape3D" parent="Clickable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("shape")
