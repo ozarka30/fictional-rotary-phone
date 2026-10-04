@@ -6,7 +6,10 @@
 [ext_resource type="Material" uid="uid://c1rqdaexrtkcb" path="res://art/room/wall_material.tres" id="2_hafop"]
 [ext_resource type="Texture2D" uid="uid://cnbmmwblqhp0c" path="res://art/placeholders/incubator.svg" id="3"]
 [ext_resource type="Texture2D" uid="uid://dry4y4x7qi3bl" path="res://art/placeholders/pen.svg" id="4"]
+[ext_resource type="Script" uid="uid://dg30ogtwho7sf" path="res://components/shared/clickable_component.gd" id="4_juq88"]
 [ext_resource type="Texture2D" uid="uid://cm4ux3myl4m5b" path="res://art/placeholders/training_gadget.svg" id="5"]
+[ext_resource type="Script" uid="uid://cqh0xbfvsypn2" path="res://components/shared/interact_point_component.gd" id="5_chf1r"]
+[ext_resource type="PackedScene" path="res://entities/avatar.tscn" id="10_uca6v"]
 
 [sub_resource type="Environment" id="Environment_mkbyq"]
 background_mode = 1
@@ -42,6 +45,21 @@ size = Vector3(12, 3, 0.2)
 [sub_resource type="BoxMesh" id="side_wall_mesh"]
 material = SubResource("wall_mat")
 size = Vector3(0.2, 3, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e2qa8"]
+size = Vector3(1.4, 1.8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_meq2f"]
+size = Vector3(1.4, 1.8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0x537"]
+size = Vector3(1.4, 1.8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7ug22"]
+size = Vector3(1.4, 1.8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ai7pp"]
+size = Vector3(1.4, 1.8, 1)
 
 [node name="ShopRoom" type="Node3D" unique_id=1186733104]
 
@@ -97,6 +115,17 @@ sprite_frames = ExtResource("1_mkbyq")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="Clickable" type="Area3D" parent="Stations/Gem" unique_id=590153069]
+script = ExtResource("4_juq88")
+
+[node name="Shape" type="CollisionShape3D" parent="Stations/Gem/Clickable" unique_id=1790724048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_e2qa8")
+
+[node name="InteractPoint" type="Marker3D" parent="Stations/Gem" unique_id=1795476500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+script = ExtResource("5_chf1r")
+
 [node name="Incubator" type="Node3D" parent="Stations" unique_id=2050753434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -2.8)
 
@@ -104,6 +133,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -2.8)
 offset = Vector2(0, 64)
 billboard = 1
 texture = ExtResource("3")
+
+[node name="Clickable" type="Area3D" parent="Stations/Incubator" unique_id=2087901041]
+script = ExtResource("4_juq88")
+
+[node name="Shape" type="CollisionShape3D" parent="Stations/Incubator/Clickable" unique_id=1574897228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_meq2f")
+
+[node name="InteractPoint" type="Marker3D" parent="Stations/Incubator" unique_id=2125811538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+script = ExtResource("5_chf1r")
 
 [node name="Pen" type="Node3D" parent="Stations" unique_id=1241493672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.8)
@@ -113,6 +153,17 @@ offset = Vector2(0, 64)
 billboard = 1
 texture = ExtResource("4")
 
+[node name="Clickable" type="Area3D" parent="Stations/Pen" unique_id=355562546]
+script = ExtResource("4_juq88")
+
+[node name="Shape" type="CollisionShape3D" parent="Stations/Pen/Clickable" unique_id=149274472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_0x537")
+
+[node name="InteractPoint" type="Marker3D" parent="Stations/Pen" unique_id=1081979160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+script = ExtResource("5_chf1r")
+
 [node name="TrainingGadget" type="Node3D" parent="Stations" unique_id=414566217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -2.8)
 
@@ -120,6 +171,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -2.8)
 offset = Vector2(0, 64)
 billboard = 1
 texture = ExtResource("5")
+
+[node name="Clickable" type="Area3D" parent="Stations/TrainingGadget" unique_id=1632775805]
+script = ExtResource("4_juq88")
+
+[node name="Shape" type="CollisionShape3D" parent="Stations/TrainingGadget/Clickable" unique_id=488705532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_7ug22")
+
+[node name="InteractPoint" type="Marker3D" parent="Stations/TrainingGadget" unique_id=1096797375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+script = ExtResource("5_chf1r")
 
 [node name="FrontDesk" type="Node3D" parent="Stations" unique_id=1915016094]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1.5)
@@ -129,9 +191,23 @@ offset = Vector2(0, 64)
 billboard = 1
 texture = ExtResource("2")
 
+[node name="Clickable" type="Area3D" parent="Stations/FrontDesk" unique_id=489878562]
+script = ExtResource("4_juq88")
+
+[node name="Shape" type="CollisionShape3D" parent="Stations/FrontDesk/Clickable" unique_id=823897121]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_ai7pp")
+
+[node name="InteractPoint" type="Marker3D" parent="Stations/FrontDesk" unique_id=1364395267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+script = ExtResource("5_chf1r")
+
 [node name="Customers" type="Node3D" parent="." unique_id=657955854]
 
 [node name="Avatars" type="Node3D" parent="." unique_id=466513661]
+
+[node name="Avatar" parent="Avatars" unique_id=1267981302 instance=ExtResource("10_uca6v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -1.6)
 
 [node name="Entrance" type="Marker3D" parent="." unique_id=53781220]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 3.5)

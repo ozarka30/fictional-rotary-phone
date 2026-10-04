@@ -35,3 +35,16 @@ func _on_clicked(entity: Node, clickable: Node) -> void:
 	var panel_id = clickable.get(&"panel_id")
 	if panel_id != null and not String(panel_id).is_empty():
 		_ui.open(panel_id, entity)
+	else:
+		_send_avatar_to(entity)
+
+
+# ponytail: direct walk-to-click until TaskWorkerComponent exists (build step 2), then clicks become tasks
+func _send_avatar_to(entity: Node) -> void:
+	var avatar := get_tree().get_first_node_in_group(&"avatar")
+	var spot := Components.get_one(entity, InteractPointComponent) as Node3D
+	if avatar == null or spot == null:
+		return
+	var mover := Components.get_one(avatar, MoverComponent) as MoverComponent
+	if mover:
+		mover.move_to(spot.global_position)
