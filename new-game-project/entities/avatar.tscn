@@ -2,6 +2,7 @@
 
 [ext_resource type="SpriteFrames" path="res://addons/duelyst_animated_sprites/spriteframes/units/neutral_prismaticillusionistminion.tres" id="1"]
 [ext_resource type="Script" path="res://components/shared/mover_component.gd" id="2"]
+[ext_resource type="Script" path="res://components/avatar/task_worker_component.gd" id="3"]
 
 [node name="Avatar" type="Node3D" groups=["avatar"]]
 
@@ -22,3 +23,6 @@ path_desired_distance = 0.3
 target_desired_distance = 0.3
 radius = 0.3
 path_height_offset = 0.5
+
+[node name="TaskWorker" type="Node" parent="."]
+script = ExtResource("3")

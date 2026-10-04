@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dg30ogtwho7sf" path="res://components/shared/clickable_component.gd" id="4_juq88"]
 [ext_resource type="Texture2D" uid="uid://cm4ux3myl4m5b" path="res://art/placeholders/training_gadget.svg" id="5"]
 [ext_resource type="Script" uid="uid://cqh0xbfvsypn2" path="res://components/shared/interact_point_component.gd" id="5_chf1r"]
+[ext_resource type="Script" uid="uid://0vhgtmon5qm8" path="res://components/shared/task_provider_component.gd" id="6_chf1r"]
 [ext_resource type="PackedScene" path="res://entities/avatar.tscn" id="10_uca6v"]
 
 [sub_resource type="Environment" id="Environment_mkbyq"]
@@ -126,6 +127,10 @@ shape = SubResource("BoxShape3D_e2qa8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("5_chf1r")
 
+[node name="TaskProvider" type="Node" parent="Stations/Gem" unique_id=1926836879]
+script = ExtResource("6_chf1r")
+kind = 0
+
 [node name="Incubator" type="Node3D" parent="Stations" unique_id=2050753434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -2.8)
 
@@ -144,6 +149,10 @@ shape = SubResource("BoxShape3D_meq2f")
 [node name="InteractPoint" type="Marker3D" parent="Stations/Incubator" unique_id=2125811538]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("5_chf1r")
+
+[node name="TaskProvider" type="Node" parent="Stations/Incubator" unique_id=1270893638]
+script = ExtResource("6_chf1r")
+kind = 1
 
 [node name="Pen" type="Node3D" parent="Stations" unique_id=1241493672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.8)
@@ -164,6 +173,10 @@ shape = SubResource("BoxShape3D_0x537")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("5_chf1r")
 
+[node name="TaskProvider" type="Node" parent="Stations/Pen" unique_id=2025928867]
+script = ExtResource("6_chf1r")
+kind = 2
+
 [node name="TrainingGadget" type="Node3D" parent="Stations" unique_id=414566217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -2.8)
 
@@ -183,6 +196,10 @@ shape = SubResource("BoxShape3D_7ug22")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("5_chf1r")
 
+[node name="TaskProvider" type="Node" parent="Stations/TrainingGadget" unique_id=166464619]
+script = ExtResource("6_chf1r")
+kind = 5
+
 [node name="FrontDesk" type="Node3D" parent="Stations" unique_id=1915016094]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1.5)
 
@@ -201,6 +218,10 @@ shape = SubResource("BoxShape3D_ai7pp")
 [node name="InteractPoint" type="Marker3D" parent="Stations/FrontDesk" unique_id=1364395267]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 script = ExtResource("5_chf1r")
+
+[node name="TaskProvider" type="Node" parent="Stations/FrontDesk" unique_id=587899441]
+script = ExtResource("6_chf1r")
+kind = 6
 
 [node name="Customers" type="Node3D" parent="." unique_id=657955854]
 
