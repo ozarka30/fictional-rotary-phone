@@ -26,3 +26,12 @@ func test_hunter_request_loads() -> void:
 	assert_eq(req.egg.malleable_days, 3)
 	assert_eq(req.intro_dialog.lines.size(), 4)  # defs are @tool so the editor keeps real values
 
+
+
+func test_hatch_basic_egg() -> void:
+	var egg: EggDef = load("res://data/eggs/basic_egg.tres")
+	var h := Hatching.hatch(egg, load("res://data/families/pup.tres"), 7)
+	assert_eq(h.uid, 7)
+	assert_eq(h.malleable_days_left, 3)
+	assert_eq(h.stats.size(), Types.Stat.size())
+	assert_eq(h.potentials[Types.Stat.KNACK], 40.0)

@@ -12,4 +12,7 @@ func make_task() -> Task:
 	t.kind = kind
 	t.target = get_parent()
 	t.duration = duration
+	var config := Components.with_method(get_parent(), &"configure_task")
+	if config:
+		config.configure_task(t)  # the station fills in check/apply
 	return t

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://coa5fyq4qtrkm" path="res://scripts/managers/task_queue.gd" id="3"]
 [ext_resource type="Script" uid="uid://b8ev82qryqvax" path="res://scripts/managers/hearthling_spawner.gd" id="4"]
 [ext_resource type="Script" uid="uid://bgqv2h4gu8h06" path="res://scripts/managers/customer_manager.gd" id="5"]
+[ext_resource type="PackedScene" path="res://entities/hearthling.tscn" id="5_85g3d"]
 [ext_resource type="Script" uid="uid://jroq7mktbybn" path="res://scripts/managers/tutorial_director.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://bf3j2eg7spk47" path="res://scenes/world/shop_room.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="8_tipki"]
@@ -22,6 +23,7 @@ script = ExtResource("3")
 
 [node name="HearthlingSpawner" type="Node" parent="." unique_id=1613805990 groups=["hearthling_spawner"]]
 script = ExtResource("4")
+hearthling_scene = ExtResource("5_85g3d")
 
 [node name="CustomerManager" type="Node" parent="." unique_id=567968584 groups=["customer_manager"]]
 script = ExtResource("5")

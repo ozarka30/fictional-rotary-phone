@@ -10,7 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://cm4ux3myl4m5b" path="res://art/placeholders/training_gadget.svg" id="5"]
 [ext_resource type="Script" uid="uid://cqh0xbfvsypn2" path="res://components/shared/interact_point_component.gd" id="5_chf1r"]
 [ext_resource type="Script" uid="uid://0vhgtmon5qm8" path="res://components/shared/task_provider_component.gd" id="6_chf1r"]
+[ext_resource type="Script" uid="uid://c381jw8y0hocx" path="res://components/stations/incubator_component.gd" id="8_0x537"]
+[ext_resource type="Resource" path="res://data/machines/incubator.tres" id="9_7ug22"]
+[ext_resource type="Resource" path="res://data/eggs/basic_egg.tres" id="10_ai7pp"]
 [ext_resource type="PackedScene" path="res://entities/avatar.tscn" id="10_uca6v"]
+[ext_resource type="Script" uid="uid://b3phtefr4x5nv" path="res://components/stations/hearthling_slot_component.gd" id="12_4aqmo"]
 
 [sub_resource type="Environment" id="Environment_mkbyq"]
 background_mode = 1
@@ -154,6 +158,11 @@ script = ExtResource("5_chf1r")
 script = ExtResource("6_chf1r")
 kind = 1
 
+[node name="Incubator" type="Node" parent="Stations/Incubator" unique_id=640347305]
+script = ExtResource("8_0x537")
+machine = ExtResource("9_7ug22")
+egg = ExtResource("10_ai7pp")
+
 [node name="Pen" type="Node3D" parent="Stations" unique_id=1241493672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.8)
 
@@ -176,6 +185,9 @@ script = ExtResource("5_chf1r")
 [node name="TaskProvider" type="Node" parent="Stations/Pen" unique_id=2025928867]
 script = ExtResource("6_chf1r")
 kind = 2
+
+[node name="Slot" type="Node" parent="Stations/Pen" unique_id=877611204]
+script = ExtResource("12_4aqmo")
 
 [node name="TrainingGadget" type="Node3D" parent="Stations" unique_id=414566217]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -2.8)
