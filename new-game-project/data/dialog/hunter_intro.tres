@@ -6,4 +6,4 @@
 script = ExtResource("1")
 id = &"hunter_intro"
 speaker = "Hunter"
-lines = PackedStringArray("Huh. Wasn't a shop here last time I passed through.", "You raise Hearthlings? Then let's see what you can do.", "Found this egg on the trail. Raise me a tracker: a good nose, and a bit of Tide in it.", "I'll be back in five days.")
+lines = PackedStringArray("Huh. Wasn't a shop here last time I passed through.", "You raise Hearthlings? Then let's see what you can do.", "> We do. What do you need?", "> ...", "Found this egg on the trail. Raise me a tracker: a good nose, and a bit of Tide in it.", "I'll be back in five days.")

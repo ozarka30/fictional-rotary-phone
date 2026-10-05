@@ -7,9 +7,11 @@
 [ext_resource type="Script" uid="uid://bgqv2h4gu8h06" path="res://scripts/managers/customer_manager.gd" id="5"]
 [ext_resource type="PackedScene" path="res://entities/hearthling.tscn" id="5_85g3d"]
 [ext_resource type="Script" uid="uid://jroq7mktbybn" path="res://scripts/managers/tutorial_director.gd" id="6"]
+[ext_resource type="PackedScene" path="res://entities/customer.tscn" id="7_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://bf3j2eg7spk47" path="res://scenes/world/shop_room.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" path="res://scenes/ui/shaping_panel.tscn" id="10_choun"]
+[ext_resource type="PackedScene" path="res://scenes/ui/customer_scene.tscn" id="12_trceg"]
 
 [node name="Main" type="Node" unique_id=798902203]
 
@@ -28,6 +30,7 @@ hearthling_scene = ExtResource("5_85g3d")
 
 [node name="CustomerManager" type="Node" parent="." unique_id=567968584 groups=["customer_manager"]]
 script = ExtResource("5")
+customer_scene = ExtResource("7_eb6dy")
 
 [node name="TutorialDirector" type="Node" parent="." unique_id=815325889]
 script = ExtResource("6")
@@ -41,3 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ShapingPanel" parent="UI" unique_id=895006773 instance=ExtResource("10_choun")]
+
+[node name="CustomerScene" parent="UI" unique_id=1313294075 instance=ExtResource("12_trceg")]
+grow_horizontal = 2
+grow_vertical = 2

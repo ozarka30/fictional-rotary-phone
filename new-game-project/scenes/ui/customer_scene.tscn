@@ -1,0 +1,206 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/customer_scene.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="box"]
+content_margin_left = 18.0
+content_margin_top = 14.0
+content_margin_right = 18.0
+content_margin_bottom = 14.0
+bg_color = Color(0.97, 0.94, 0.87, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.35, 0.25, 0.15, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="tag"]
+content_margin_left = 22.0
+content_margin_top = 4.0
+content_margin_right = 22.0
+content_margin_bottom = 4.0
+bg_color = Color(0.97, 0.94, 0.87, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.72, 0.56, 0.27, 1)
+
+[sub_resource type="StyleBoxFlat" id="reply"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.93, 0.8, 0.5, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.35, 0.25, 0.15, 1)
+
+[node name="CustomerScene" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+reply_style = SubResource("reply")
+
+[node name="Wall" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.36, 0.29, 0.22, 1)
+
+[node name="Background" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(330, 330)
+scale = Vector2(6, 6)
+
+[node name="Portrait" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 140.0
+offset_top = -560.0
+offset_right = 520.0
+offset_bottom = -140.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Desk" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+mouse_filter = 2
+color = Color(0.5, 0.4, 0.3, 1)
+
+[node name="DialogBox" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -110.0
+offset_top = 150.0
+offset_right = 470.0
+offset_bottom = 400.0
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="Header" type="HBoxContainer" parent="DialogBox"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Tag" type="PanelContainer" parent="DialogBox/Header"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("tag")
+
+[node name="Name" type="Label" parent="DialogBox/Header/Tag"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.16, 0.08, 1)
+theme_override_font_sizes/font_size = 20
+text = "NAME"
+
+[node name="Gap" type="Control" parent="DialogBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Skip" type="Button" parent="DialogBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.16, 0.08, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("tag")
+theme_override_styles/hover = SubResource("tag")
+theme_override_styles/pressed = SubResource("tag")
+text = "SKIP"
+
+[node name="Panel" type="PanelContainer" parent="DialogBox"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("box")
+
+[node name="Text" type="RichTextLabel" parent="DialogBox/Panel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/normal_font_size = 21
+fit_content = true
+
+[node name="Replies" type="VBoxContainer" parent="DialogBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RequestCard" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -440.0
+offset_right = 470.0
+offset_bottom = -170.0
+theme_override_styles/panel = SubResource("box")
+
+[node name="VBox" type="VBoxContainer" parent="RequestCard"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CardTitle" type="Label" parent="RequestCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.16, 0.08, 1)
+theme_override_font_sizes/font_size = 26
+text = "Request"
+
+[node name="CardText" type="Label" parent="RequestCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_font_sizes/font_size = 18
+autowrap_mode = 3
+
+[node name="Accept" type="Button" parent="RequestCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.24, 0.16, 0.08, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("reply")
+theme_override_styles/hover = SubResource("reply")
+theme_override_styles/pressed = SubResource("reply")
+text = "Accept"

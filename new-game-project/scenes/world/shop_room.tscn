@@ -12,9 +12,9 @@
 [ext_resource type="Script" uid="uid://0vhgtmon5qm8" path="res://components/shared/task_provider_component.gd" id="6_chf1r"]
 [ext_resource type="Script" uid="uid://c381jw8y0hocx" path="res://components/stations/incubator_component.gd" id="8_0x537"]
 [ext_resource type="Resource" path="res://data/machines/incubator.tres" id="9_7ug22"]
-[ext_resource type="Resource" path="res://data/eggs/basic_egg.tres" id="10_ai7pp"]
 [ext_resource type="PackedScene" path="res://entities/avatar.tscn" id="10_uca6v"]
 [ext_resource type="Script" uid="uid://b3phtefr4x5nv" path="res://components/stations/hearthling_slot_component.gd" id="12_4aqmo"]
+[ext_resource type="Script" uid="uid://cdif4go0wbokh" path="res://components/stations/front_desk_component.gd" id="14_0x537"]
 
 [sub_resource type="Environment" id="Environment_mkbyq"]
 background_mode = 1
@@ -161,7 +161,6 @@ kind = 1
 [node name="Incubator" type="Node" parent="Stations/Incubator" unique_id=640347305]
 script = ExtResource("8_0x537")
 machine = ExtResource("9_7ug22")
-egg = ExtResource("10_ai7pp")
 
 [node name="Pen" type="Node3D" parent="Stations" unique_id=1241493672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.8)
@@ -234,6 +233,9 @@ script = ExtResource("5_chf1r")
 [node name="TaskProvider" type="Node" parent="Stations/FrontDesk" unique_id=587899441]
 script = ExtResource("6_chf1r")
 kind = 6
+
+[node name="FrontDesk" type="Node" parent="Stations/FrontDesk" unique_id=1155191371]
+script = ExtResource("14_0x537")
 
 [node name="Customers" type="Node3D" parent="." unique_id=657955854]
 
