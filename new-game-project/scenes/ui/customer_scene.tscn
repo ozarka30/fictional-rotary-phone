@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" path="res://art/customer/speech_bubble.png" id="4"]
 [ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="6"]
 [ext_resource type="FontFile" path="res://art/fonts/Supro-Regular.ttf" id="7"]
+[ext_resource type="Texture2D" path="res://art/customer/option_box.png" id="8"]
 [ext_resource type="SpriteFrames" path="res://addons/duelyst_animated_sprites/spriteframes/units/f6_ynuyttracker.tres" id="5"]
 
 [sub_resource type="Theme" id="comic"]
@@ -41,6 +42,17 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
+[sub_resource type="StyleBoxTexture" id="option"]
+content_margin_left = 26.0
+content_margin_top = 12.0
+content_margin_right = 26.0
+content_margin_bottom = 14.0
+texture = ExtResource("8")
+texture_margin_left = 20.0
+texture_margin_top = 18.0
+texture_margin_right = 20.0
+texture_margin_bottom = 18.0
+
 [sub_resource type="StyleBoxFlat" id="reply"]
 content_margin_left = 22.0
 content_margin_top = 10.0
@@ -66,7 +78,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource("comic")
 script = ExtResource("1")
-reply_style = SubResource("reply")
+reply_style = SubResource("option")
 
 [node name="Background" type="TextureRect" parent="."]
 unique_name_in_owner = true
@@ -112,23 +124,6 @@ mouse_filter = 2
 texture = ExtResource("3")
 expand_mode = 1
 
-[node name="Skip" type="Button" parent="."]
-theme_override_fonts/font = ExtResource("7")
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -112.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = 52.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("tag")
-theme_override_styles/hover = SubResource("tag")
-theme_override_styles/pressed = SubResource("tag")
-text = "SKIP"
 
 [node name="DialogBox" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
@@ -193,6 +188,7 @@ vertical_alignment = 1
 
 [node name="Replies" type="VBoxContainer" parent="DialogBox"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(380, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_constants/separation = 8
@@ -240,7 +236,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
 theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = SubResource("reply")
-theme_override_styles/hover = SubResource("reply")
-theme_override_styles/pressed = SubResource("reply")
+theme_override_styles/normal = SubResource("option")
+theme_override_styles/hover = SubResource("option")
+theme_override_styles/pressed = SubResource("option")
 text = "Accept"

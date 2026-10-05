@@ -18,7 +18,6 @@ var _choosing := false
 func _ready() -> void:
 	hide()  # visible in the editor for layout; UIManager shows it
 	add_to_group(&"panel")
-	%Skip.pressed.connect(_finish)
 	%Accept.pressed.connect(_accept)
 
 
@@ -59,23 +58,34 @@ func _show_line() -> void:
 	if line.begins_with("> "):
 		_choosing = true
 		while _i < _dialog.lines.size() and _dialog.lines[_i].begins_with("> "):
-			var b := Button.new()
-			b.text = _dialog.lines[_i].substr(2)
-			for state in [&"normal", &"hover", &"pressed", &"focus"]:
-				b.add_theme_stylebox_override(state, reply_style)
-			b.add_theme_color_override(&"font_color", Color(0.08, 0.08, 0.08))
-			b.add_theme_color_override(&"font_hover_color", Color(0, 0, 0))
-			b.add_theme_font_size_override(&"font_size", 20)
-			b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-			b.pressed.connect(func(): _choosing = false; _show_line())
-			%Replies.add_child(b)
+			_option(_dialog.lines[_i].substr(2), func(): _choosing = false; _show_line())
 			_i += 1
+		_option("Skip", _finish)
 		return
+	_option("Skip", _finish)
 	_i += 1
 	%Text.text = line
 	%Text.visible_ratio = 0.0
 	_typing = create_tween()
 	_typing.tween_property(%Text, "visible_ratio", 1.0, line.length() * TYPE_SPEED)
+
+
+## One dialog option box. Skip is always the last one.
+func _option(text: String, on_press: Callable) -> void:
+	var b := Button.new()
+	b.text = text
+	b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	b.focus_mode = Control.FOCUS_NONE
+	for state in [&"normal", &"hover", &"pressed"]:
+		var style: StyleBoxTexture = reply_style.duplicate()
+		style.modulate_color = {&"normal": Color.WHITE, &"hover": Color(0.85, 0.85, 0.85), &"pressed": Color(0.7, 0.7, 0.7)}[state]
+		b.add_theme_stylebox_override(state, style)
+	b.add_theme_color_override(&"font_color", Color(0.08, 0.08, 0.08))
+	b.add_theme_color_override(&"font_hover_color", Color(0, 0, 0))
+	b.add_theme_color_override(&"font_pressed_color", Color(0, 0, 0))
+	b.add_theme_font_size_override(&"font_size", 20)
+	b.pressed.connect(on_press)
+	%Replies.add_child(b)
 
 
 func _finish() -> void:
