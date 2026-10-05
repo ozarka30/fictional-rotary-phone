@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="6"]
 [ext_resource type="FontFile" path="res://art/fonts/Supro-Regular.ttf" id="7"]
 [ext_resource type="Texture2D" path="res://art/customer/option_box.png" id="8"]
+[ext_resource type="Texture2D" path="res://art/customer/card_box.png" id="9"]
 [ext_resource type="SpriteFrames" path="res://addons/duelyst_animated_sprites/spriteframes/units/f6_ynuyttracker.tres" id="5"]
 
 [sub_resource type="Theme" id="comic"]
@@ -41,6 +42,17 @@ corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxTexture" id="card"]
+content_margin_left = 34.0
+content_margin_top = 28.0
+content_margin_right = 34.0
+content_margin_bottom = 28.0
+texture = ExtResource("9")
+texture_margin_left = 40.0
+texture_margin_top = 40.0
+texture_margin_right = 40.0
+texture_margin_bottom = 40.0
 
 [sub_resource type="StyleBoxTexture" id="option"]
 content_margin_left = 26.0
@@ -204,7 +216,7 @@ offset_left = -150.0
 offset_top = 110.0
 offset_right = 470.0
 offset_bottom = 380.0
-theme_override_styles/panel = SubResource("box")
+theme_override_styles/panel = SubResource("card")
 
 [node name="VBox" type="VBoxContainer" parent="RequestCard"]
 layout_mode = 2
