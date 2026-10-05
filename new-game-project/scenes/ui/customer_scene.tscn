@@ -1,211 +1,221 @@
-[gd_scene format=3 uid="uid://dpbr5p3ap6yae"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://cc7utoi3ol1q2" path="res://scenes/ui/customer_scene.gd" id="1"]
-[ext_resource type="SpriteFrames" uid="uid://bkw5xeas3okbv" path="res://addons/duelyst_animated_sprites/spriteframes/units/f6_ynuyttracker.tres" id="2_48loh"]
-
-[sub_resource type="StyleBoxFlat" id="reply"]
-content_margin_left = 18.0
-content_margin_top = 10.0
-content_margin_right = 18.0
-content_margin_bottom = 10.0
-bg_color = Color(0.93, 0.8, 0.5, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.35, 0.25, 0.15, 1)
-
-[sub_resource type="StyleBoxFlat" id="tag"]
-content_margin_left = 22.0
-content_margin_top = 4.0
-content_margin_right = 22.0
-content_margin_bottom = 4.0
-bg_color = Color(0.97, 0.94, 0.87, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.72, 0.56, 0.27, 1)
+[ext_resource type="Script" path="res://scenes/ui/customer_scene.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/customer/background.jpg" id="2"]
+[ext_resource type="Texture2D" path="res://art/customer/desk.png" id="3"]
+[ext_resource type="Texture2D" path="res://art/customer/speech_bubble.png" id="4"]
+[ext_resource type="SpriteFrames" path="res://addons/duelyst_animated_sprites/spriteframes/units/f6_ynuyttracker.tres" id="5"]
 
 [sub_resource type="StyleBoxFlat" id="box"]
 content_margin_left = 18.0
 content_margin_top = 14.0
 content_margin_right = 18.0
 content_margin_bottom = 14.0
-bg_color = Color(0.97, 0.94, 0.87, 1)
+bg_color = Color(1, 1, 1, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.35, 0.25, 0.15, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_offset = Vector2(4, 4)
 
-[node name="CustomerScene" type="Control" unique_id=1841414222]
+[sub_resource type="StyleBoxFlat" id="tag"]
+content_margin_left = 18.0
+content_margin_top = 3.0
+content_margin_right = 18.0
+content_margin_bottom = 3.0
+bg_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="reply"]
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.05, 0.05, 0.05, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_offset = Vector2(3, 3)
+
+[node name="CustomerScene" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1")
 reply_style = SubResource("reply")
 
-[node name="Wall" type="ColorRect" parent="." unique_id=1681842437]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.36, 0.29, 0.22, 1)
-
-[node name="Background" type="TextureRect" parent="." unique_id=636850773]
+[node name="Background" type="TextureRect" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 mouse_filter = 2
+texture = ExtResource("2")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=2015975058]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
-position = Vector2(330, 330)
+position = Vector2(300, 400)
 scale = Vector2(6, 6)
-sprite_frames = ExtResource("2_48loh")
+sprite_frames = ExtResource("5")
 animation = &"breathing"
 
-[node name="Portrait" type="TextureRect" parent="." unique_id=501695879]
+[node name="Portrait" type="TextureRect" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 140.0
+offset_left = 110.0
 offset_top = -560.0
-offset_right = 520.0
-offset_bottom = -140.0
-grow_vertical = 0
+offset_right = 490.0
+offset_bottom = -60.0
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Desk" type="ColorRect" parent="." unique_id=1889305806]
+[node name="Desk" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -150.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_top = -120.0
 mouse_filter = 2
-color = Color(0.5, 0.4, 0.3, 1)
+texture = ExtResource("3")
+expand_mode = 1
 
-[node name="DialogBox" type="VBoxContainer" parent="." unique_id=389207527]
+[node name="Skip" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -112.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 52.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("tag")
+theme_override_styles/hover = SubResource("tag")
+theme_override_styles/pressed = SubResource("tag")
+text = "SKIP"
+
+[node name="DialogBox" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -110.0
-offset_top = 150.0
+offset_left = -150.0
+offset_top = 70.0
 offset_right = 470.0
-offset_bottom = 400.0
-grow_horizontal = 2
+offset_bottom = 480.0
 mouse_filter = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 4
 
-[node name="Header" type="HBoxContainer" parent="DialogBox" unique_id=316939007]
+[node name="Header" type="HBoxContainer" parent="DialogBox"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Tag" type="PanelContainer" parent="DialogBox/Header" unique_id=710069992]
+[node name="Tag" type="PanelContainer" parent="DialogBox/Header"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("tag")
 
-[node name="Name" type="Label" parent="DialogBox/Header/Tag" unique_id=1638457998]
+[node name="Name" type="Label" parent="DialogBox/Header/Tag"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.24, 0.16, 0.08, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
 text = "NAME"
 
-[node name="Gap" type="Control" parent="DialogBox/Header" unique_id=1608030149]
+[node name="Bubble" type="TextureRect" parent="DialogBox"]
+custom_minimum_size = Vector2(620, 212)
 layout_mode = 2
-size_flags_horizontal = 3
 mouse_filter = 2
+texture = ExtResource("4")
+expand_mode = 1
+flip_h = true
 
-[node name="Skip" type="Button" parent="DialogBox/Header" unique_id=1608629197]
+[node name="Margin" type="MarginContainer" parent="DialogBox/Bubble"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 34
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 50
+
+[node name="Text" type="RichTextLabel" parent="DialogBox/Bubble/Margin"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.24, 0.16, 0.08, 1)
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("tag")
-theme_override_styles/pressed = SubResource("tag")
-theme_override_styles/hover = SubResource("tag")
-text = "SKIP"
-
-[node name="Panel" type="PanelContainer" parent="DialogBox" unique_id=159380510]
-layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("box")
-
-[node name="Text" type="RichTextLabel" parent="DialogBox/Panel" unique_id=336403114]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 56)
-layout_mode = 2
-mouse_filter = 2
-theme_override_colors/default_color = Color(0.2, 0.14, 0.08, 1)
-theme_override_font_sizes/normal_font_size = 21
+theme_override_colors/default_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 22
 text = "Customer dialog goes here."
-fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Replies" type="VBoxContainer" parent="DialogBox" unique_id=662897367]
+[node name="Replies" type="VBoxContainer" parent="DialogBox"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 8
 
-[node name="RequestCard" type="PanelContainer" parent="." unique_id=1989104875]
+[node name="RequestCard" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -110.0
-offset_top = -440.0
+offset_left = -150.0
+offset_top = 110.0
 offset_right = 470.0
-offset_bottom = -170.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_bottom = 380.0
 theme_override_styles/panel = SubResource("box")
 
-[node name="VBox" type="VBoxContainer" parent="RequestCard" unique_id=3600869]
+[node name="VBox" type="VBoxContainer" parent="RequestCard"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="CardTitle" type="Label" parent="RequestCard/VBox" unique_id=1781872804]
+[node name="CardTitle" type="Label" parent="RequestCard/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.24, 0.16, 0.08, 1)
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
 theme_override_font_sizes/font_size = 26
 text = "Request"
 
-[node name="CardText" type="Label" parent="RequestCard/VBox" unique_id=1967865319]
+[node name="CardText" type="Label" parent="RequestCard/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.2, 0.14, 0.08, 1)
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_font_sizes/font_size = 18
 text = "Request summary
 
@@ -213,13 +223,13 @@ Needs: ...
 Back in 5 days  -  Reward: 50 coin"
 autowrap_mode = 3
 
-[node name="Accept" type="Button" parent="RequestCard/VBox" unique_id=2011072575]
+[node name="Accept" type="Button" parent="RequestCard/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_colors/font_color = Color(0.24, 0.16, 0.08, 1)
+theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("reply")
-theme_override_styles/pressed = SubResource("reply")
 theme_override_styles/hover = SubResource("reply")
+theme_override_styles/pressed = SubResource("reply")
 text = "Accept"

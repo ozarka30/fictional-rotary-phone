@@ -3,7 +3,6 @@ extends Control
 ## Dialog lines starting with "> " are the player's replies; several in a row become choices.
 ## A new customer ends on their request card; a returning one just talks (delivery is next).
 
-@export var background: Texture2D  # ponytail: placeholder colors until the desk art lands
 @export var reply_style: StyleBox
 
 const TYPE_SPEED := 0.02  # seconds per character
@@ -21,8 +20,6 @@ func _ready() -> void:
 	add_to_group(&"panel")
 	%Skip.pressed.connect(_finish)
 	%Accept.pressed.connect(_accept)
-	if background:
-		%Background.texture = background
 
 
 func open(customer: Node) -> void:
@@ -66,8 +63,8 @@ func _show_line() -> void:
 			b.text = _dialog.lines[_i].substr(2)
 			for state in [&"normal", &"hover", &"pressed", &"focus"]:
 				b.add_theme_stylebox_override(state, reply_style)
-			b.add_theme_color_override(&"font_color", Color(0.24, 0.16, 0.08))
-			b.add_theme_color_override(&"font_hover_color", Color(0.05, 0.03, 0.01))
+			b.add_theme_color_override(&"font_color", Color(0.08, 0.08, 0.08))
+			b.add_theme_color_override(&"font_hover_color", Color(0, 0, 0))
 			b.add_theme_font_size_override(&"font_size", 20)
 			b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 			b.pressed.connect(func(): _choosing = false; _show_line())
