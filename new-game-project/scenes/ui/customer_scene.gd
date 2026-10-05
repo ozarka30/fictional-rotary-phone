@@ -17,6 +17,7 @@ var _choosing := false
 
 
 func _ready() -> void:
+	hide()  # visible in the editor for layout; UIManager shows it
 	add_to_group(&"panel")
 	%Skip.pressed.connect(_finish)
 	%Accept.pressed.connect(_accept)
