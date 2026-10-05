@@ -96,15 +96,21 @@ func _finish() -> void:
 		return
 	var r := _giver.request
 	var needs := PackedStringArray()
-	for s in r.min_stats:
-		needs.append("%s %s+" % [Types.Stat.keys()[s].capitalize(), Types.grade_name(r.min_stats[s])])
+	for st in r.min_stats:
+		needs.append(_chip("%s %s+" % [Types.Stat.keys()[st].capitalize(), Types.grade_name(r.min_stats[st])], Types.STAT_COLORS[st]))
 	for a in r.min_affinities:
-		needs.append("%s %s+" % [Types.Affinity.keys()[a].capitalize(), Types.grade_name(r.min_affinities[a])])
+		needs.append(_chip("%s %s+" % [Types.Affinity.keys()[a].capitalize(), Types.grade_name(r.min_affinities[a])], Types.AFFINITY_COLORS[a]))
 	%CardTitle.text = "%s's request" % r.customer_name
-	%CardText.text = "%s\n\nNeeds: %s\nBack in %d days  -  Reward: %d coin" % [r.summary, ", ".join(needs), r.return_after_days, r.reward_coin]
+	%CardText.text = "%s\n\nNeeds: %s\nBack in %s  -  Reward: %s" % [r.summary, ", ".join(needs),
+		_chip("%d days" % r.return_after_days, Types.DAYS_COLOR), _chip("%d coin" % r.reward_coin, Types.COIN_COLOR)]
 	%Accept.text = "Take the egg" if r.egg else "Accept"
 	%DialogBox.hide()
 	%RequestCard.show()
+
+
+## Colored, ink-outlined text for the parts of a request that matter.
+func _chip(text: String, color: Color) -> String:
+	return "[outline_size=5][outline_color=#181818][color=#%s]%s[/color][/outline_color][/outline_size]" % [color.to_html(false), text]
 
 
 func _accept() -> void:
