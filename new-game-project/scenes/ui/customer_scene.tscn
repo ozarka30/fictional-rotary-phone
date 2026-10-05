@@ -4,7 +4,13 @@
 [ext_resource type="Texture2D" path="res://art/customer/background.jpg" id="2"]
 [ext_resource type="Texture2D" path="res://art/customer/desk.png" id="3"]
 [ext_resource type="Texture2D" path="res://art/customer/speech_bubble.png" id="4"]
+[ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="6"]
+[ext_resource type="FontFile" path="res://art/fonts/Supro-Regular.ttf" id="7"]
 [ext_resource type="SpriteFrames" path="res://addons/duelyst_animated_sprites/spriteframes/units/f6_ynuyttracker.tres" id="5"]
+
+[sub_resource type="Theme" id="comic"]
+default_font = ExtResource("6")
+default_font_size = 22
 
 [sub_resource type="StyleBoxFlat" id="box"]
 content_margin_left = 18.0
@@ -58,6 +64,7 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = SubResource("comic")
 script = ExtResource("1")
 reply_style = SubResource("reply")
 
@@ -106,6 +113,7 @@ texture = ExtResource("3")
 expand_mode = 1
 
 [node name="Skip" type="Button" parent="."]
+theme_override_fonts/font = ExtResource("7")
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 1
@@ -145,6 +153,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("tag")
 
 [node name="Name" type="Label" parent="DialogBox/Header/Tag"]
+theme_override_fonts/font = ExtResource("7")
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -206,6 +215,7 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="CardTitle" type="Label" parent="RequestCard/VBox"]
+theme_override_fonts/font = ExtResource("7")
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.05, 0.05, 0.05, 1)
@@ -224,6 +234,7 @@ Back in 5 days  -  Reward: 50 coin"
 autowrap_mode = 3
 
 [node name="Accept" type="Button" parent="RequestCard/VBox"]
+theme_override_fonts/font = ExtResource("7")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
