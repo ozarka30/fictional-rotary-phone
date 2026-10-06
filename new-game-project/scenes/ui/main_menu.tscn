@@ -54,13 +54,6 @@ title = "Front Desk"
 border = ExtResource("10")
 fill = ExtResource("11")
 
-[node name="Shop" parent="Row" unique_id=319469835 instance=ExtResource("2")]
-custom_minimum_size = Vector2(285, 185)
-layout_mode = 2
-page = &"shop"
-title = "Shop"
-border = ExtResource("12")
-fill = ExtResource("13")
 
 [node name="TrainingYard" parent="Row" unique_id=1415952249 instance=ExtResource("2")]
 custom_minimum_size = Vector2(235, 186)
@@ -77,3 +70,11 @@ page = &"pens"
 title = "Pens"
 border = ExtResource("16")
 fill = ExtResource("17")
+
+[node name="Shop" parent="Row" unique_id=319469835 instance=ExtResource("2")]
+custom_minimum_size = Vector2(285, 185)
+layout_mode = 2
+page = &"shop"
+title = "Shop"
+border = ExtResource("12")
+fill = ExtResource("13")
