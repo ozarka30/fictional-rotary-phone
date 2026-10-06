@@ -1,35 +1,39 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dnlv4gvlpxbl6"]
 
-[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1"]
+[ext_resource type="Script" uid="uid://blm1426jhk8xt" path="res://scenes/ui/main_menu.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menu_card.tscn" id="2"]
-[ext_resource type="Texture2D" path="res://art/customer/background.jpg" id="3"]
-[ext_resource type="Texture2D" path="res://art/menu/border_1.png" id="10"]
-[ext_resource type="Texture2D" path="res://art/menu/fill_green.png" id="11"]
-[ext_resource type="Texture2D" path="res://art/menu/border_2.png" id="12"]
-[ext_resource type="Texture2D" path="res://art/menu/fill_lime.png" id="13"]
-[ext_resource type="Texture2D" path="res://art/menu/border_3.png" id="14"]
-[ext_resource type="Texture2D" path="res://art/menu/fill_sky.png" id="15"]
-[ext_resource type="Texture2D" path="res://art/menu/border_4.png" id="16"]
-[ext_resource type="Texture2D" path="res://art/menu/fill_blue.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://m17n0tqa4cn" path="res://art/customer/background.jpg" id="3"]
+[ext_resource type="Texture2D" uid="uid://lj00hyav5nq8" path="res://art/menu/border_1.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://bbr43rxmrnlnu" path="res://art/menu/fill_green.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://bgdy6aicej30c" path="res://art/menu/border_2.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://d4lhukc0g1t4r" path="res://art/menu/fill_lime.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://n2ieceqd1r14" path="res://art/menu/border_3.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://ceuqob5d121xl" path="res://art/menu/fill_sky.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://dro0hlphrtkko" path="res://art/menu/border_4.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://dc61o0em72th4" path="res://art/menu/fill_blue.png" id="17"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=1964222274]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=798220122]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("3")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Row" type="HBoxContainer" parent="."]
+[node name="Row" type="HBoxContainer" parent="." unique_id=2039058047]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 14
@@ -38,31 +42,36 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 offset_top = -95.0
 offset_bottom = 95.0
-alignment = 1
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = -6
+alignment = 1
 
-[node name="FrontDesk" parent="Row" instance=ExtResource("2")]
+[node name="FrontDesk" parent="Row" unique_id=1287623261 instance=ExtResource("2")]
 layout_mode = 2
 page = &"front_desk"
 title = "Front Desk"
 border = ExtResource("10")
 fill = ExtResource("11")
 
-[node name="Shop" parent="Row" instance=ExtResource("2")]
+[node name="Shop" parent="Row" unique_id=319469835 instance=ExtResource("2")]
+custom_minimum_size = Vector2(285, 185)
 layout_mode = 2
 page = &"shop"
 title = "Shop"
 border = ExtResource("12")
 fill = ExtResource("13")
 
-[node name="TrainingYard" parent="Row" instance=ExtResource("2")]
+[node name="TrainingYard" parent="Row" unique_id=1415952249 instance=ExtResource("2")]
+custom_minimum_size = Vector2(235, 186)
 layout_mode = 2
 page = &"training_yard"
 title = "Training Yard"
 border = ExtResource("14")
 fill = ExtResource("15")
 
-[node name="Pens" parent="Row" instance=ExtResource("2")]
+[node name="Pens" parent="Row" unique_id=884401553 instance=ExtResource("2")]
+custom_minimum_size = Vector2(235, 186)
 layout_mode = 2
 page = &"pens"
 title = "Pens"
