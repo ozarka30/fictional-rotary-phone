@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dj7485el873as" path="res://art/main_page/bot_hex_fill.png" id="21"]
 [ext_resource type="Texture2D" uid="uid://c18ecyufp0yba" path="res://art/main_page/bot_right_border.png" id="22"]
 [ext_resource type="Texture2D" uid="uid://b1h64am34fogi" path="res://art/main_page/bot_right_fill.png" id="23"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud_bar.tscn" id="hud"]
 
 [node name="MainPage" type="Control" unique_id=1336120583]
 layout_mode = 3
@@ -146,3 +147,7 @@ layout_mode = 0
 offset_right = 246.40001
 offset_bottom = 193.6
 tip = Vector2(29, 115)
+
+[node name="HudBar" parent="." instance=ExtResource("hud")]
+layout_mode = 1
+show_back = false

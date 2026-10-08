@@ -4,6 +4,7 @@ class_name RequestDef extends Resource
 
 @export var id: StringName
 @export var customer_name: String
+@export var customer_frames: SpriteFrames  # shown big in the customer scene until portraits exist
 @export_multiline var summary: String
 @export var min_stats: Dictionary[Types.Stat, Types.Grade] = {}
 @export var min_affinities: Dictionary[Types.Affinity, Types.Grade] = {}

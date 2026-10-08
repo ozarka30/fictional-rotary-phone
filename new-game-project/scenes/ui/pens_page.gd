@@ -1,5 +1,11 @@
 extends SlotPage
-## Pens: four environments (the pen defs), each holding up to five eggs or Hearthlings.
+## Pens: four environments, each holding up to five Hearthlings.
+## Click an empty slot to hatch an egg there; click a Hearthling to open its workbench.
+
+
+func _ready() -> void:
+	%Workbench.closed.connect(func(): select(_sel))
+	super()
 
 
 func options() -> Array:
@@ -7,17 +13,43 @@ func options() -> Array:
 
 
 func slot(option: Dictionary, i: int) -> Dictionary:
-	var here := GameState.hearthlings.values().filter(func(h): return h.pen_id == option.id)
+	var here := _here(option.id)
 	if i >= here.size():
-		return {"title": "Empty", "blurb": "Room for an egg or a Hearthling."}
+		return {"title": "Empty", "blurb": "Click to hatch an egg here (%d in stock)." % GameState.eggs.size() if GameState.eggs else "Empty. Get eggs from requests or the Market."}
 	var h: HearthlingData = here[i]
 	var family: FamilyDef = Database.get_def(&"families", h.family_id)
+	var todo := PackedStringArray()
+	if Shaping.can_shape(h):
+		if not h.fed_today:
+			todo.append("food")
+		if not h.acted_today:
+			todo.append("action")
 	var status := "settled" if h.stabilized else "%d shaping day(s) left" % h.malleable_days_left
-	return {"title": family.name, "blurb": "#%d, %s" % [h.uid, status]}
+	return {"title": "%s #%d" % [family.name, h.uid], "blurb": "%s%s" % [status, ". Needs " + " and ".join(todo) + " today" if todo else ""]}
+
+
+func slot_pressed(option: Dictionary, i: int) -> void:
+	var here := _here(option.id)
+	if i < here.size():
+		%Workbench.open(here[i])
+		return
+	if GameState.eggs.is_empty():
+		%Callout.say("No eggs. Take a request at the Front Desk or buy one at the Market.", get_viewport().get_mouse_position())
+		return
+	var egg: EggDef = GameState.eggs.pop_front()
+	var h := Hatching.hatch(egg, Database.get_def(&"families", egg.family_id), GameState.new_uid())
+	h.pen_id = option.id
+	GameState.hearthlings[h.uid] = h
+	EventBus.hearthling_hatched.emit(h)
+	select(_sel)
+	%Callout.say("It hatched!", get_viewport().get_mouse_position())
+
+
+func _here(pen_id: StringName) -> Array:
+	return GameState.hearthlings.values().filter(func(h): return h.pen_id == pen_id)
 
 
 func _pen_blurb(p: PenDef) -> String:
 	if p.affinity == Types.Affinity.NONE:
 		return "A plain pen. No nightly push."
-	var a := Ink.chip("+%d %s" % [p.push_per_day, Types.Affinity.keys()[p.affinity].capitalize()], Types.AFFINITY_COLORS[p.affinity])
-	return "%s each night. Costs %d mana." % [a, p.mana_cost]
+	return "%s each night." % Ink.chip("+%d %s" % [p.push_per_day, Types.Affinity.keys()[p.affinity].capitalize()], Types.AFFINITY_COLORS[p.affinity])

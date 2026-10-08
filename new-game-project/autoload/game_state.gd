@@ -6,7 +6,8 @@ var coin := 0
 var materials := {}            # StringName -> int
 var hearthlings := {}          # uid -> HearthlingData
 var active_requests: Array = []  # ActiveRequest
-var unlocked_stations: Array[StringName] = []
+var waiting: Array = [preload("res://data/requests/hunter_tracker.tres")]  # new customers at the desk, in order
+var eggs: Array = []           # EggDef, not yet hatched
 var tutorial_flags := {}       # StringName -> bool
 var yard_slots := {}           # yard id -> Array of 5 Hearthling uids (-1 = empty)
 

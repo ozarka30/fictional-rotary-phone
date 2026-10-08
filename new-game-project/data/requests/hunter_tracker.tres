@@ -4,11 +4,13 @@
 [ext_resource type="Resource" path="res://data/eggs/basic_egg.tres" id="2"]
 [ext_resource type="Resource" uid="uid://b6vn7mqres453" path="res://data/dialog/hunter_intro.tres" id="3"]
 [ext_resource type="Resource" path="res://data/dialog/hunter_return.tres" id="4"]
+[ext_resource type="SpriteFrames" path="res://addons/duelyst_animated_sprites/spriteframes/units/f6_ynuyttracker.tres" id="5"]
 
 [resource]
 script = ExtResource("1")
 id = &"hunter_tracker"
 customer_name = "Hunter"
+customer_frames = ExtResource("5")
 summary = "A tracker for hunting: C Knack and some Tide."
 min_stats = Dictionary[int, int]({
 5: 2

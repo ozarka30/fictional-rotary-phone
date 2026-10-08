@@ -7,7 +7,12 @@ signal page_selected(page: StringName)
 
 func _ready() -> void:
 	for card: MenuCard in find_children("*", "MenuCard", true, false):
-		card.pressed.connect(func(p): page_selected.emit(p); print("open page: ", p))  # ponytail: pages hook in here
+		card.pressed.connect(func(p):
+			page_selected.emit(p)
+			if Nav.PAGES.has(p):
+				Nav.go(p)
+			else:
+				%Callout.say("Coming soon.", card.global_position + Vector2(card.size.x * 0.5, 8)))
 		if card.blurb:
 			card.mouse_entered.connect(func(): %Callout.say(card.blurb, card.global_position + Vector2(card.size.x * 0.5, 8)))
 			card.mouse_exited.connect(%Callout.hide)

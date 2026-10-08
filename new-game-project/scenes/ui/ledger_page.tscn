@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" path="res://art/main_page/top_fill.png" id="5"]
 [ext_resource type="FontFile" path="res://art/fonts/Supro-Regular.ttf" id="9"]
 [ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="10"]
-[ext_resource type="Resource" path="res://data/requests/hunter_tracker.tres" id="11"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud_bar.tscn" id="hud"]
 
 [node name="LedgerPage" type="Control"]
 layout_mode = 3
@@ -15,7 +15,6 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("1")
-demo_request = ExtResource("11")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -78,3 +77,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 2
 theme_override_constants/separation = 14
+
+[node name="HudBar" parent="." instance=ExtResource("hud")]
+layout_mode = 1

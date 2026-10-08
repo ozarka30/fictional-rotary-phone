@@ -2,9 +2,14 @@
 
 [ext_resource type="PackedScene" path="res://scenes/ui/training_yard_page.tscn" id="1"]
 [ext_resource type="Script" path="res://scenes/ui/pens_page.gd" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/ui/workbench.tscn" id="workbench"]
 
 [node name="PensPage" instance=ExtResource("1")]
 script = ExtResource("2")
 
 [node name="Title" parent="Rows/Top/Content/VBox" index="0"]
 text = "Pens"
+
+[node name="Workbench" parent="." instance=ExtResource("workbench")]
+unique_name_in_owner = true
+layout_mode = 1

@@ -59,3 +59,22 @@ func test_preview_leaves_original() -> void:
 	var p := Shaping.preview(h, load("res://data/foods/brine_fish.tres"), null, load("res://data/pens/basic_pen.tres"))
 	assert_eq(p.affinities[Types.Affinity.TIDE], 12.0)
 	assert_false(h.affinities.has(Types.Affinity.TIDE))
+
+
+## Full hunter run: 3 shaping days in the wash basin, 2 nights at the Scent Trail -> C Knack, D Tide, 3 stars.
+func test_hunter_run_scores() -> void:
+	var r: RequestDef = load("res://data/requests/hunter_tracker.tres")
+	var h := Hatching.hatch(r.egg, load("res://data/families/pup.tres"), 1)
+	var basin: PenDef = load("res://data/pens/wash_basin.tres")
+	for day in 3:
+		if day < 2:
+			Shaping.give_food(h, load("res://data/foods/brine_fish.tres"), basin)
+		Shaping.give_action(h, load("res://data/actions/sniff_and_find.tres"))
+		var settled := Shaping.end_day(h, basin)
+		assert_eq(settled, day == 2)
+	assert_true(h.stabilized)
+	for night in 2:
+		Training.train(h, Training.YARDS[1].stats)
+	assert_eq(h.stats[Types.Stat.KNACK], 40.0)
+	assert_true(Scoring.meets(h, r))
+	assert_eq(Scoring.stars(h, r), 3)

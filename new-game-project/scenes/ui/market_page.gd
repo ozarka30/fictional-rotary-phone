@@ -25,7 +25,10 @@ func _buy(box: ShopItem) -> void:
 		%Callout.say("Not enough coin.", box.global_position + Vector2(box.size.x * 0.5, 8))
 		return
 	GameState.add_coin(-def.cost)
-	GameState.add_material(def.id, 1)  # ponytail: bought things sit in materials until there's an inventory
+	if def is EggDef:
+		GameState.eggs.append(def)
+	else:
+		GameState.add_material(def.id, 1)  # ponytail: food sits in materials until feeding costs stock
 	%Callout.say("Bought %s!" % def.name, box.global_position + Vector2(box.size.x * 0.5, 8))
 
 

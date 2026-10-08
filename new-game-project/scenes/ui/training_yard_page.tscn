@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/callout.tscn" id="8"]
 [ext_resource type="FontFile" path="res://art/fonts/Supro-Regular.ttf" id="9"]
 [ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="10"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud_bar.tscn" id="hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/chooser.tscn" id="chooser"]
 
 [node name="TrainingYardPage" type="Control"]
 layout_mode = 3
@@ -86,3 +88,10 @@ size_flags_horizontal = 4
 [node name="Callout" parent="." instance=ExtResource("8")]
 unique_name_in_owner = true
 visible = false
+
+[node name="HudBar" parent="." instance=ExtResource("hud")]
+layout_mode = 1
+
+[node name="Chooser" parent="." instance=ExtResource("chooser")]
+unique_name_in_owner = true
+layout_mode = 1

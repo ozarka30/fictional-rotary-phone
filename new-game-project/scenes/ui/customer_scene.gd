@@ -1,14 +1,16 @@
 extends Control
 ## Talking to a customer gets its own screen: a backdrop, the customer, and dialog boxes.
 ## Dialog lines starting with "> " are the player's replies; several in a row become choices.
-## A new customer ends on their request card; a returning one just talks (delivery is next).
+## A new customer ends on their request card; a returning one picks a Hearthling and rates it.
 
 @export var reply_style: StyleBox
 
 const TYPE_SPEED := 0.02  # seconds per character
 
-var _customer: Node
-var _giver: RequestGiverComponent
+signal finished
+
+var _request: RequestDef
+var _active: ActiveRequest
 var _dialog: DialogDef
 var _i := 0
 var _typing: Tween
@@ -16,21 +18,21 @@ var _choosing := false
 
 
 func _ready() -> void:
-	hide()  # visible in the editor for layout; UIManager shows it
-	add_to_group(&"panel")
 	%Accept.pressed.connect(_accept)
 
 
-func open(customer: Node) -> void:
-	_customer = customer
-	_giver = Components.get_one(customer, RequestGiverComponent) as RequestGiverComponent
-	_dialog = _giver.active.def.return_dialog if _giver.active else _giver.request.intro_dialog
+## A new customer (no `active`) or one coming back for `active`.
+func open_request(r: RequestDef, active: ActiveRequest = null) -> void:
+	_request = r
+	_active = active
+	_dialog = r.return_dialog if active else r.intro_dialog
 	%Name.text = _dialog.speaker.to_upper()
 	%Portrait.texture = _dialog.portrait
 	# ponytail: no portrait art yet, so show the customer's own sprite big
-	%Sprite.visible = _dialog.portrait == null
-	%Sprite.sprite_frames = customer.get_node(^"Sprite").sprite_frames
+	%Sprite.visible = _dialog.portrait == null and r.customer_frames != null
+	%Sprite.sprite_frames = r.customer_frames
 	%Sprite.play(&"breathing")
+	show()
 	%DialogBox.show()
 	%RequestCard.hide()
 	_i = 0
@@ -91,10 +93,10 @@ func _option(text: String, on_press: Callable) -> void:
 func _finish() -> void:
 	_choosing = false
 	EventBus.dialog_finished.emit(_dialog.id)
-	if _giver.active:
-		_leave()
+	if _active:
+		_offer_hearthlings()
 		return
-	var r := _giver.request
+	var r := _request
 	var needs := PackedStringArray()
 	for st in r.min_stats:
 		needs.append(Ink.chip("%s %s" % [Types.Stat.keys()[st].capitalize(), Ink.grade(r.min_stats[st], "+")], Types.STAT_COLORS[st]))
@@ -108,17 +110,52 @@ func _finish() -> void:
 	%RequestCard.show()
 
 
+## Returning customer: pick which settled Hearthling to hand over.
+func _offer_hearthlings() -> void:
+	for c in %Replies.get_children():
+		c.queue_free()
+	%Text.text = "So, which one is mine?"
+	%Text.visible_ratio = 1.0
+	_choosing = true
+	for h: HearthlingData in GameState.hearthlings.values():
+		if h.stabilized:
+			var family: FamilyDef = Database.get_def(&"families", h.family_id)
+			_option("%s #%d" % [family.name, h.uid], _deliver.bind(h))
+	_option("Not ready yet", finished.emit)
+
+
+func _deliver(h: HearthlingData) -> void:
+	var r := _request
+	var stars := Scoring.stars(h, r)
+	var happy := Scoring.meets(h, r)
+	_active.fulfilled = true
+	_active.grade = stars
+	GameState.hearthlings.erase(h.uid)
+	for slots in GameState.yard_slots.values():
+		for i in slots.size():
+			if slots[i] == h.uid:
+				slots[i] = -1
+	if happy:
+		GameState.add_coin(r.reward_coin)
+	EventBus.request_completed.emit(_active, stars)
+	%CardTitle.text = "%s's verdict" % r.customer_name
+	%CardText.text = "[font=%s][font_size=40]%d / 5 STARS[/font_size][/font]\n\n%s" % [Ink.GRADE_FONT, stars,
+		"Exactly what I needed. Here's %s." % Ink.chip("%d coin" % r.reward_coin, Types.COIN_COLOR) if happy else "This isn't what I asked for. No pay this time."]
+	%Accept.text = "Back to the shop"
+	%DialogBox.hide()
+	%RequestCard.show()
+
+
 func _accept() -> void:
-	var r := _giver.request
+	if _active:  # the verdict card
+		finished.emit()
+		return
+	var r := _request
 	var active := ActiveRequest.start(r, GameState.day)
 	GameState.active_requests.append(active)
-	get_tree().get_first_node_in_group(&"customer_manager").schedule_return(r, active.due_day)
+	GameState.waiting.erase(r)
 	EventBus.request_received.emit(active)
 	if r.egg:
+		GameState.eggs.append(r.egg)
 		EventBus.egg_received.emit(r.egg)
-	_leave()
-
-
-func _leave() -> void:
-	get_tree().get_first_node_in_group(&"ui_manager").close()
-	get_tree().get_first_node_in_group(&"customer_manager").leave(_customer)
+	finished.emit()

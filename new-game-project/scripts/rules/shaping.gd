@@ -23,6 +23,36 @@ static func night(h: HearthlingData, pen: PenDef, rested: bool) -> void:
 	h.malleable_days_left = maxi(h.malleable_days_left - 1, 0)
 
 
+## Today's food / action, once each, from the workbench.
+static func give_food(h: HearthlingData, food: FoodDef, pen: PenDef) -> void:
+	feed(h, food, pen)
+	h.fed_today = true
+
+
+static func give_action(h: HearthlingData, action: ActionDef) -> void:
+	act(h, action)
+	h.acted_today = true
+	h.rested_today = action.is_rest
+
+
+static func can_shape(h: HearthlingData) -> bool:
+	return not h.stabilized and h.malleable_days_left > 0
+
+
+## Overnight for one Hearthling. True if it settled tonight.
+static func end_day(h: HearthlingData, pen: PenDef) -> bool:
+	var settled := false
+	if can_shape(h):
+		night(h, pen, h.rested_today)
+		if h.malleable_days_left == 0:
+			h.stabilized = true  # ponytail: form, traits and skills lock in here later
+			settled = true
+	h.fed_today = false
+	h.acted_today = false
+	h.rested_today = false
+	return settled
+
+
 ## What `h` would look like after this food and action (either may be null).
 static func preview(h: HearthlingData, food: FoodDef, action: ActionDef, pen: PenDef) -> HearthlingData:
 	var p: HearthlingData = h.duplicate()

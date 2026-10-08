@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/callout.tscn" id="8"]
 [ext_resource type="FontFile" path="res://art/fonts/Supro-Regular.ttf" id="9"]
 [ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="10"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud_bar.tscn" id="hud"]
 
 [node name="MarketPage" type="Control"]
 layout_mode = 3
@@ -83,3 +84,6 @@ columns = 6
 [node name="Callout" parent="." instance=ExtResource("8")]
 unique_name_in_owner = true
 visible = false
+
+[node name="HudBar" parent="." instance=ExtResource("hud")]
+layout_mode = 1
