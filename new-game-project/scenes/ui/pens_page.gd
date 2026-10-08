@@ -21,7 +21,7 @@ func slot(option: Dictionary, i: int) -> Dictionary:
 	var status := "settled" if h.stabilized else "%d shaping day(s) left" % h.malleable_days_left
 	if Shaping.can_shape(h) and not h.fed_today:
 		status += ". Needs food today"
-	return {"title": "%s #%d" % [family.name, h.uid], "blurb": status}
+	return {"title": "%s #%d" % [family.name, h.uid], "blurb": status, "uid": h.uid}
 
 
 func slot_pressed(option: Dictionary, i: int) -> void:

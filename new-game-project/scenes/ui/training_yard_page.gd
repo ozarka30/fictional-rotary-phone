@@ -13,7 +13,7 @@ func slot(option: Dictionary, i: int) -> Dictionary:
 		return {"title": "Empty", "blurb": "Click to place a settled Hearthling here."}
 	var h: HearthlingData = GameState.hearthlings[uid]
 	var family: FamilyDef = Database.get_def(&"families", h.family_id)
-	return {"title": "%s #%d" % [family.name, uid], "blurb": "Training here. Click to take it out."}
+	return {"title": "%s #%d" % [family.name, uid], "blurb": "Training here. Click to take it out.", "uid": uid}
 
 
 func slot_pressed(option: Dictionary, i: int) -> void:

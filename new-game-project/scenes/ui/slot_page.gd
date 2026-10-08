@@ -13,7 +13,8 @@ func options() -> Array:
 	return []
 
 
-## Override: what slot `i` of `option` shows, as {"title", "blurb"}.
+## Override: what slot `i` of `option` shows, as {"title", "blurb"}, plus "uid" if a Hearthling is there
+## (hovering it then shows its stat card).
 func slot(option: Dictionary, i: int) -> Dictionary:
 	return {"title": "Empty", "blurb": ""}
 
@@ -51,10 +52,27 @@ func select(i: int) -> void:
 		var info := slot(_options[i], s)
 		card.title = info.title
 		card.blurb = info.blurb
+		card.set_meta(&"uid", info.get("uid", -1))
+
+
+const CREATURE_FRAMES := preload("res://addons/duelyst_animated_sprites/spriteframes/units/neutral_xho.tres")  # ponytail: one sprite until families have art
 
 
 func _callout(card: MenuCard) -> void:
 	card.mouse_entered.connect(func():
-		if card.blurb:
+		var uid: int = card.get_meta(&"uid", -1)
+		if GameState.hearthlings.has(uid):
+			_show_card(GameState.hearthlings[uid], card)
+		elif card.blurb:
 			%Callout.say(card.blurb, card.global_position + Vector2(card.size.x * 0.5, 8)))
-	card.mouse_exited.connect(%Callout.hide)
+	card.mouse_exited.connect(func():
+		%Callout.hide()
+		%Info.hide())
+
+
+## The Hearthling's stat card, beside the slot and kept on screen.
+func _show_card(h: HearthlingData, card: Control) -> void:
+	%Info.show_hearthling(h, CREATURE_FRAMES)
+	var view := get_viewport_rect().size
+	var pos := card.global_position + Vector2(card.size.x * 0.5 - %Info.size.x * 0.5, -%Info.size.y + 40)
+	%Info.global_position = pos.clamp(Vector2(8, 8), view - %Info.size - Vector2(8, 8))

@@ -7,14 +7,14 @@ func show_hearthling(h: HearthlingData, frames: SpriteFrames) -> void:
 	var family: FamilyDef = Database.get_def(&"families", h.family_id)
 	var rows := PackedStringArray()
 	for s in Types.Stat.values():
-		rows.append("%s %s [color=#bdbdbd](cap %s)[/color]" % [Ink.chip(Types.Stat.keys()[s].capitalize(), Types.STAT_COLORS[s]),
-			Ink.grade(h.stat_grade(s), "", 20), Types.grade_name(Types.grade_of(h.potentials[s]))])
+		rows.append("%s %s %d [color=#bdbdbd]/ %d[/color]" % [Ink.chip(Types.Stat.keys()[s].capitalize(), Types.STAT_COLORS[s]),
+			Ink.grade(h.stat_grade(s), "", 20), h.stats[s], h.potentials[s]])
 	var affs := PackedStringArray()
 	for a in h.affinities:
 		if h.affinities[a] > 0.0:
-			affs.append("%s %s" % [Ink.chip(Types.Affinity.keys()[a].capitalize(), Types.AFFINITY_COLORS[a]), Ink.grade(h.affinity_grade(a), "", 20)])
+			affs.append("%s %s %d" % [Ink.chip(Types.Affinity.keys()[a].capitalize(), Types.AFFINITY_COLORS[a]), Ink.grade(h.affinity_grade(a), "", 20), h.affinities[a]])
 	var status := "Settled" if h.stabilized else "%d shaping day(s) left" % h.malleable_days_left
-	_fill(family.name, frames, "\n".join(rows) + ("\n" + "  ".join(affs) if affs else "") + "\n[color=#dee2e6]%s[/color]" % status)
+	_fill("%s #%d" % [family.name, h.uid], frames, "\n".join(rows) + ("\n" + "  ".join(affs) if affs else "") + "\n[color=#dee2e6]%s[/color]" % status)
 
 
 func show_egg(egg: EggDef, frames: SpriteFrames) -> void:
