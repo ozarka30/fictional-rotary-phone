@@ -8,6 +8,7 @@ var hearthlings := {}          # uid -> HearthlingData
 var active_requests: Array = []  # ActiveRequest
 var unlocked_stations: Array[StringName] = []
 var tutorial_flags := {}       # StringName -> bool
+var yard_slots := {}           # yard id -> Array of 5 Hearthling uids (-1 = empty)
 
 var mana_capacity := 10        # ponytail: placeholder, tune with the tutorial costs
 var _mana_locks := {}          # owner_id -> amount
