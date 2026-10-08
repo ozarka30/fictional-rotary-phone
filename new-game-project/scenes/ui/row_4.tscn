@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/ink_row.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/ui/menu_card.tscn" id="2"]
+[ext_resource type="Texture2D" path="res://art/rows/row4_1_border.png" id="12"]
+[ext_resource type="Texture2D" path="res://art/rows/row4_1_fill.png" id="13"]
+[ext_resource type="Texture2D" path="res://art/rows/row4_2_border.png" id="14"]
+[ext_resource type="Texture2D" path="res://art/rows/row4_2_fill.png" id="15"]
+[ext_resource type="Texture2D" path="res://art/rows/row4_3_border.png" id="16"]
+[ext_resource type="Texture2D" path="res://art/rows/row4_3_fill.png" id="17"]
+[ext_resource type="Texture2D" path="res://art/rows/row4_4_border.png" id="18"]
+[ext_resource type="Texture2D" path="res://art/rows/row4_4_fill.png" id="19"]
+
+[node name="Row4" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1")
+gaps = PackedFloat32Array(-21, 11, -21)
+
+[node name="Card1" parent="." instance=ExtResource("2")]
+layout_mode = 0
+border = ExtResource("12")
+fill = ExtResource("13")
+panel_scale = 0.616
+title = "Option 1"
+
+[node name="Card2" parent="." instance=ExtResource("2")]
+layout_mode = 0
+border = ExtResource("14")
+fill = ExtResource("15")
+panel_scale = 0.616
+title = "Option 2"
+
+[node name="Card3" parent="." instance=ExtResource("2")]
+layout_mode = 0
+border = ExtResource("16")
+fill = ExtResource("17")
+panel_scale = 0.616
+title = "Option 3"
+
+[node name="Card4" parent="." instance=ExtResource("2")]
+layout_mode = 0
+border = ExtResource("18")
+fill = ExtResource("19")
+panel_scale = 0.616
+title = "Option 4"
