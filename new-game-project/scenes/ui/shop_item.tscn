@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/menu_card.tscn" id="1"]
+[ext_resource type="Script" path="res://scenes/ui/shop_item.gd" id="2"]
+[ext_resource type="Texture2D" path="res://art/shop/box_border.png" id="3"]
+[ext_resource type="Texture2D" path="res://art/shop/box_fill.png" id="4"]
+[ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="5"]
+
+[node name="ShopItem" instance=ExtResource("1")]
+script = ExtResource("2")
+border = ExtResource("3")
+fill = ExtResource("4")
+panel_scale = 0.6
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 34.0
+offset_right = -28.0
+offset_bottom = -44.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Price" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 36.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.992, 0.804, 0.004, 1)
+theme_override_colors/font_outline_color = Color(0.094, 0.094, 0.094, 1)
+theme_override_constants/outline_size = 6
+theme_override_fonts/font = ExtResource("5")
+theme_override_font_sizes/font_size = 18
+text = "0 coin"
+horizontal_alignment = 1
+
+[node name="Title" parent="."]
+offset_top = -44.0
+offset_bottom = -12.0
+theme_override_font_sizes/font_size = 20
