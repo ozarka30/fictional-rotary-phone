@@ -1,0 +1,40 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/ui_kit_demo.gd" id="1"]
+[ext_resource type="Texture2D" path="res://art/customer/background.jpg" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/ui/info_popup.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/ui/callout.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/ui/thought.tscn" id="5"]
+
+[node name="UIKitDemo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="EggCard" parent="." instance=ExtResource("3")]
+unique_name_in_owner = true
+offset_left = 150.0
+offset_top = 200.0
+
+[node name="PupCard" parent="." instance=ExtResource("3")]
+unique_name_in_owner = true
+offset_left = 640.0
+offset_top = 200.0
+
+[node name="Callout" parent="." instance=ExtResource("4")]
+unique_name_in_owner = true
+
+[node name="Thought" parent="." instance=ExtResource("5")]
+unique_name_in_owner = true

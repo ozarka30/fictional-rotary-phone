@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/ink_panel.tscn" id="1"]
+[ext_resource type="Script" path="res://scenes/ui/callout.gd" id="2"]
+[ext_resource type="Texture2D" path="res://art/ui/callout_border.png" id="3"]
+[ext_resource type="Texture2D" path="res://art/ui/callout_fill.png" id="4"]
+[ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="5"]
+
+[node name="Callout" instance=ExtResource("1")]
+script = ExtResource("2")
+border = ExtResource("3")
+fill = ExtResource("4")
+panel_scale = 1.6
+text = "Callout text"
+
+[node name="Content" parent="." index="2"]
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 72
+
+[node name="Text" type="RichTextLabel" parent="Content" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.08, 0.08, 0.08, 1)
+theme_override_fonts/normal_font = ExtResource("5")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Callout text"
+horizontal_alignment = 1
+vertical_alignment = 1

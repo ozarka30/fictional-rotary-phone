@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://blm1426jhk8xt" path="res://scenes/ui/main_menu.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menu_card.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/ui/callout.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://m17n0tqa4cn" path="res://art/customer/background.jpg" id="3"]
 [ext_resource type="Texture2D" uid="uid://lj00hyav5nq8" path="res://art/menu/border_1.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://bbr43rxmrnlnu" path="res://art/menu/fill_green.png" id="11"]
@@ -48,6 +49,7 @@ theme_override_constants/separation = -6
 alignment = 1
 
 [node name="FrontDesk" parent="Row" unique_id=1287623261 instance=ExtResource("2")]
+blurb = "Customers wait here with requests."
 layout_mode = 2
 page = &"front_desk"
 title = "Front Desk"
@@ -56,6 +58,7 @@ fill = ExtResource("11")
 
 
 [node name="TrainingYard" parent="Row" unique_id=1415952249 instance=ExtResource("2")]
+blurb = "Train settled Hearthlings toward their caps."
 custom_minimum_size = Vector2(235, 186)
 layout_mode = 2
 page = &"training_yard"
@@ -64,6 +67,7 @@ border = ExtResource("14")
 fill = ExtResource("15")
 
 [node name="Pens" parent="Row" unique_id=884401553 instance=ExtResource("2")]
+blurb = "Feed and shape your Hearthlings each day."
 custom_minimum_size = Vector2(235, 186)
 layout_mode = 2
 page = &"pens"
@@ -72,9 +76,14 @@ border = ExtResource("16")
 fill = ExtResource("17")
 
 [node name="Shop" parent="Row" unique_id=319469835 instance=ExtResource("2")]
+blurb = "Buy eggs, food and materials."
 custom_minimum_size = Vector2(285, 185)
 layout_mode = 2
 page = &"shop"
 title = "Shop"
 border = ExtResource("12")
 fill = ExtResource("13")
+
+[node name="Callout" parent="." instance=ExtResource("4")]
+unique_name_in_owner = true
+visible = false

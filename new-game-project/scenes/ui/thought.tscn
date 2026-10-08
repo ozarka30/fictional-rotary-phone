@@ -1,0 +1,17 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/callout.tscn" id="1"]
+[ext_resource type="Texture2D" path="res://art/ui/thought_border.png" id="2"]
+[ext_resource type="Texture2D" path="res://art/ui/thought_fill.png" id="3"]
+
+[node name="Thought" instance=ExtResource("1")]
+border = ExtResource("2")
+fill = ExtResource("3")
+tip = Vector2(107, 96)
+text = "Thought text"
+
+[node name="Content" parent="." index="2"]
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 50

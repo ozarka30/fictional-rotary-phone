@@ -6,7 +6,6 @@ extends Control
 @export var reply_style: StyleBox
 
 const TYPE_SPEED := 0.02  # seconds per character
-const GRADE_FONT := "res://art/fonts/Mastro-Regular.ttf"
 
 var _customer: Node
 var _giver: RequestGiverComponent
@@ -98,26 +97,15 @@ func _finish() -> void:
 	var r := _giver.request
 	var needs := PackedStringArray()
 	for st in r.min_stats:
-		needs.append(_chip("%s %s" % [Types.Stat.keys()[st].capitalize(), _grade(r.min_stats[st])], Types.STAT_COLORS[st]))
+		needs.append(Ink.chip("%s %s" % [Types.Stat.keys()[st].capitalize(), Ink.grade(r.min_stats[st], "+")], Types.STAT_COLORS[st]))
 	for a in r.min_affinities:
-		needs.append(_chip("%s %s" % [Types.Affinity.keys()[a].capitalize(), _grade(r.min_affinities[a])], Types.AFFINITY_COLORS[a]))
+		needs.append(Ink.chip("%s %s" % [Types.Affinity.keys()[a].capitalize(), Ink.grade(r.min_affinities[a], "+")], Types.AFFINITY_COLORS[a]))
 	%CardTitle.text = "%s's request" % r.customer_name
 	%CardText.text = "%s\n\nNeeds: %s\nBack in %s  -  Reward: %s" % [r.summary, ", ".join(needs),
-		_chip("%d days" % r.return_after_days, Types.DAYS_COLOR), _chip("%d coin" % r.reward_coin, Types.COIN_COLOR)]
+		Ink.chip("%d days" % r.return_after_days, Types.DAYS_COLOR), Ink.chip("%d coin" % r.reward_coin, Types.COIN_COLOR)]
 	%Accept.text = "Take the egg" if r.egg else "Accept"
 	%DialogBox.hide()
 	%RequestCard.show()
-
-
-## Colored, ink-outlined text for the parts of a request that matter.
-func _chip(text: String, color: Color) -> String:
-	return "[outline_size=5][outline_color=#181818][color=#%s]%s[/color][/outline_color][/outline_size]" % [color.to_html(false), text]
-
-
-
-## Grade letters get their own chunky font so they pop.
-func _grade(g: Types.Grade) -> String:
-	return "[font=%s][font_size=26]%s+[/font_size][/font]" % [GRADE_FONT, Types.grade_name(g)]
 
 
 func _accept() -> void:
