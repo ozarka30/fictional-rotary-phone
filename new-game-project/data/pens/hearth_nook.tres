@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PenDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/pen_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"hearth_nook"
+name = "Hearth nook"
+affinity = 1
+push_per_day = 5.0
+mana_cost = 1
