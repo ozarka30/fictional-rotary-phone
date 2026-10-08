@@ -20,6 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://c18ecyufp0yba" path="res://art/main_page/bot_right_border.png" id="22"]
 [ext_resource type="Texture2D" uid="uid://b1h64am34fogi" path="res://art/main_page/bot_right_fill.png" id="23"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud_bar.tscn" id="hud"]
+[ext_resource type="FontFile" path="res://art/fonts/Supro-Regular.ttf" id="font_title"]
+[ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="font_body"]
 
 [node name="MainPage" type="Control" unique_id=1336120583]
 layout_mode = 3
@@ -60,6 +62,34 @@ size_flags_horizontal = 4
 border = ExtResource("10")
 fill = ExtResource("11")
 panel_scale = 0.593
+
+[node name="Content" parent="Rows/Top" index="2"]
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_right = 40
+
+[node name="VBox" type="VBoxContainer" parent="Rows/Top/Content" index="0"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="ShopName" type="Label" parent="Rows/Top/Content/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.094, 0.094, 0.094, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("font_title")
+theme_override_font_sizes/font_size = 44
+text = "Hearthling Shop"
+horizontal_alignment = 1
+
+[node name="Status" type="Label" parent="Rows/Top/Content/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.094, 0.094, 0.094, 1)
+theme_override_fonts/font = ExtResource("font_body")
+theme_override_font_sizes/font_size = 24
+text = "Today in the shop"
+horizontal_alignment = 1
 
 [node name="Middle" type="HBoxContainer" parent="Rows" unique_id=1430764834]
 layout_mode = 2

@@ -1,6 +1,6 @@
 extends Control
 ## A home page: every MenuCard in it opens one area of the shop, with a callout on hover.
-## Used by main_menu.tscn and main_page.tscn. An optional %Status label shows day, mana and coin.
+## Used by main_page.tscn. An optional %Status label shows what needs doing today.
 
 signal page_selected(page: StringName)
 
@@ -18,8 +18,20 @@ func _ready() -> void:
 			card.mouse_exited.connect(%Callout.hide)
 	var status := get_node_or_null(^"%Status") as Label
 	if status:
-		var refresh := func(_a = null, _b = null): status.text = "Day %d    Mana %d / %d    %d coin" % [GameState.day, GameState.free_mana(), GameState.mana_capacity, GameState.coin]
-		EventBus.day_started.connect(refresh)
-		EventBus.mana_changed.connect(refresh)
-		EventBus.coin_changed.connect(refresh)
-		refresh.call()
+		status.text = today()
+
+
+## One line of what needs doing, for the top banner.
+static func today() -> String:
+	var bits := PackedStringArray()
+	var back := GameState.active_requests.filter(func(a): return not a.fulfilled and GameState.day >= a.due_day)
+	for a in back:
+		bits.append("%s is back for their Hearthling" % a.def.customer_name)
+	if GameState.waiting and back.is_empty():
+		bits.append("%s is waiting at the desk" % GameState.waiting[0].customer_name)
+	if GameState.eggs:
+		bits.append("%d egg(s) to hatch" % GameState.eggs.size())
+	var hungry := GameState.hearthlings.values().filter(func(h): return Shaping.can_shape(h) and not h.fed_today).size()
+	if hungry:
+		bits.append("%d need food" % hungry)
+	return "   -   ".join(bits) if bits else "All caught up. Sleep when you're ready."
