@@ -37,44 +37,26 @@ func test_hatch_basic_egg() -> void:
 	assert_eq(h.potentials[Types.Stat.KNACK], 40.0)
 
 
-## The hunter's best line: Brine fish x2 + Sniff-and-find x3 in the wash basin.
-func test_shaping_hunter_line() -> void:
-	var h := Hatching.hatch(load("res://data/eggs/basic_egg.tres"), load("res://data/families/pup.tres"), 1)
-	var fish: FoodDef = load("res://data/foods/brine_fish.tres")
-	var sniff: ActionDef = load("res://data/actions/sniff_and_find.tres")
-	var basin: PenDef = load("res://data/pens/wash_basin.tres")
-	for day in 3:
-		if day < 2:
-			Shaping.feed(h, fish, basin)
-		Shaping.act(h, sniff)
-		Shaping.night(h, basin, false)
-	assert_eq(h.malleable_days_left, 0)
-	assert_eq(h.affinity_grade(Types.Affinity.TIDE), Types.Grade.D)  # 24 + 15 = 39, just shy of C
-	assert_eq(h.stats[Types.Stat.KNACK], 28.0)                        # training closes the gap to C
-	assert_eq(h.potentials[Types.Stat.KNACK], 55.0)
-
 
 func test_preview_leaves_original() -> void:
 	var h := Hatching.hatch(load("res://data/eggs/basic_egg.tres"), load("res://data/families/pup.tres"), 1)
-	var p := Shaping.preview(h, load("res://data/foods/brine_fish.tres"), null, load("res://data/pens/basic_pen.tres"))
+	var p := Shaping.preview(h, load("res://data/foods/brine_fish.tres"), load("res://data/pens/basic_pen.tres"))
 	assert_eq(p.affinities[Types.Affinity.TIDE], 12.0)
 	assert_false(h.affinities.has(Types.Affinity.TIDE))
 
 
-## Full hunter run: 3 shaping days in the wash basin, 2 nights at the Scent Trail -> C Knack, D Tide, 3 stars.
+
+## Hunter run: Brine fish on days 1-2 in the wash basin; once settled, Scent Trail on nights 4-5.
+## Ends with C Knack (exactly 40) and D Tide (39): 3 stars.
 func test_hunter_run_scores() -> void:
 	var r: RequestDef = load("res://data/requests/hunter_tracker.tres")
 	var h := Hatching.hatch(r.egg, load("res://data/families/pup.tres"), 1)
 	var basin: PenDef = load("res://data/pens/wash_basin.tres")
-	for day in 3:
-		if day < 2:
+	for night in 5:
+		if night < 2:
 			Shaping.give_food(h, load("res://data/foods/brine_fish.tres"), basin)
-		Shaping.give_action(h, load("res://data/actions/sniff_and_find.tres"))
-		var settled := Shaping.end_day(h, basin)
-		assert_eq(settled, day == 2)
-	assert_true(h.stabilized)
-	for night in 2:
-		Training.train(h, Training.YARDS[1].stats)
+		Training.train(h, Training.YARDS[1].stats)  # no effect until settled
+		assert_eq(Shaping.end_day(h, basin), night == 2)
 	assert_eq(h.stats[Types.Stat.KNACK], 40.0)
-	assert_true(Scoring.meets(h, r))
+	assert_eq(h.affinities[Types.Affinity.TIDE], 39.0)
 	assert_eq(Scoring.stars(h, r), 3)

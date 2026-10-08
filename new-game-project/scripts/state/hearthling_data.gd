@@ -19,10 +19,8 @@ class_name HearthlingData extends Resource
 
 @export var pen_id: StringName
 @export var fed_today := false
-@export var acted_today := false
-@export var rested_today := false
 @export var idle_streak := 0
-@export var history: Array[DayEntry] = []  # food, action, pen per day; becomes the recipe later
+@export var history: Array[DayEntry] = []  # food and pen per day; becomes the recipe later
 
 
 func stat_grade(stat: Types.Stat) -> Types.Grade:

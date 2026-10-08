@@ -27,7 +27,7 @@ func slot_pressed(option: Dictionary, i: int) -> void:
 		busy.append_array(s)
 	var free := GameState.hearthlings.values().filter(func(h): return h.stabilized and not busy.has(h.uid))
 	if free.is_empty():
-		%Callout.say("No settled Hearthlings free to train.", get_viewport().get_mouse_position())
+		%Callout.say("No settled Hearthlings free to train. Shaping ones settle when their days run out.", get_viewport().get_mouse_position())
 		return
 	var labels := PackedStringArray(free.map(func(h): return "%s #%d" % [Database.get_def(&"families", h.family_id).name, h.uid]))
 	var pick: int = await %Chooser.ask(option.name, labels)

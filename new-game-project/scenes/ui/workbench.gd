@@ -1,12 +1,11 @@
 extends PanelContainer
-## The shaping workbench for one Hearthling: today's food and action, its pen, and a lean preview.
-## Confirm applies the picks straight away; they count once per day.
+## The shaping workbench for one Hearthling: today's food, its pen, and a lean preview.
+## Confirm applies the food straight away (once per day). Training happens in the Training Yard.
 
 signal closed
 
 var _h: HearthlingData
 var _food: FoodDef
-var _action: ActionDef
 var _pen: PenDef
 
 @onready var _box := VBoxContainer.new()
@@ -20,7 +19,6 @@ func _ready() -> void:
 func open(h: HearthlingData) -> void:
 	_h = h
 	_food = null
-	_action = null
 	_pen = Database.get_def(&"pens", h.pen_id)
 	_rebuild()
 	show()
@@ -34,7 +32,6 @@ func _rebuild() -> void:
 	_label("%s #%d  -  %s" % [family.name, _h.uid, "%d shaping day(s) left" % _h.malleable_days_left if shaping else "settled"], 24)
 	if shaping:
 		_choices("Food", Database.get_all(&"foods"), _food, _h.fed_today, func(d): _food = d)
-		_choices("Action", Database.get_all(&"actions"), _action, _h.acted_today, func(d): _action = d)
 		_choices("Pen", Database.get_all(&"pens").slice(0, 4), _pen, false, func(d): _pen = d)
 	_preview()
 	var row := HBoxContainer.new()
@@ -57,7 +54,7 @@ func _choices(title: String, defs: Array, picked: Resource, done: bool, pick: Ca
 
 
 func _preview() -> void:
-	var p := Shaping.preview(_h, _food, _action, _pen)
+	var p := Shaping.preview(_h, _food, _pen)
 	var grid := GridContainer.new()
 	grid.columns = 4
 	grid.add_theme_constant_override(&"h_separation", 18)
@@ -84,8 +81,6 @@ func _confirm() -> void:
 	_h.pen_id = _pen.id
 	if _food and not _h.fed_today:
 		Shaping.give_food(_h, _food, _pen)
-	if _action and not _h.acted_today:
-		Shaping.give_action(_h, _action)
 	EventBus.hearthling_changed.emit(_h)
 	_close()
 

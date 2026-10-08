@@ -1,7 +1,8 @@
 class_name Training
-## Yards train settled Hearthlings overnight: each trained stat climbs toward its cap.
+## The only place stats are trained: each night, a Hearthling in a yard gains in that yard's stats, up to its caps.
+## Only settled Hearthlings train; shaping is food and environment only.
 
-const PER_NIGHT := 6.0  # ponytail: tuned so the hunter's best line reaches C Knack in two nights
+const PER_NIGHT := 15.0  # ponytail: tuned so the hunter's pup goes 10 -> C Knack (40) in its 2 settled nights
 
 # ponytail: yards as consts until they need costs, unlocks or art (then a YardDef in data/yards)
 const YARDS := [

@@ -1,5 +1,5 @@
 extends SlotPage
-## Pens: four environments, each holding up to five Hearthlings.
+## Pens: where Hearthlings live. The environment pushes an affinity each night; food is given here.
 ## Click an empty slot to hatch an egg there; click a Hearthling to open its workbench.
 
 
@@ -18,14 +18,10 @@ func slot(option: Dictionary, i: int) -> Dictionary:
 		return {"title": "Empty", "blurb": "Click to hatch an egg here (%d in stock)." % GameState.eggs.size() if GameState.eggs else "Empty. Get eggs from requests or the Market."}
 	var h: HearthlingData = here[i]
 	var family: FamilyDef = Database.get_def(&"families", h.family_id)
-	var todo := PackedStringArray()
-	if Shaping.can_shape(h):
-		if not h.fed_today:
-			todo.append("food")
-		if not h.acted_today:
-			todo.append("action")
 	var status := "settled" if h.stabilized else "%d shaping day(s) left" % h.malleable_days_left
-	return {"title": "%s #%d" % [family.name, h.uid], "blurb": "%s%s" % [status, ". Needs " + " and ".join(todo) + " today" if todo else ""]}
+	if Shaping.can_shape(h) and not h.fed_today:
+		status += ". Needs food today"
+	return {"title": "%s #%d" % [family.name, h.uid], "blurb": status}
 
 
 func slot_pressed(option: Dictionary, i: int) -> void:

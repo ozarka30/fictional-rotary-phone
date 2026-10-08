@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="ActionDef" format=3]
-
-[ext_resource type="Script" path="res://scripts/defs/action_def.gd" id="1"]
-
-[resource]
-script = ExtResource("1")
-id = &"rest"
-name = "Rest"
-is_rest = true
