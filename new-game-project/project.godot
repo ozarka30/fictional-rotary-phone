@@ -22,9 +22,12 @@ GameState="*res://autoload/game_state.gd"
 Database="*res://autoload/database.gd"
 DayManager="*res://autoload/day_manager.gd"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
+Display="*res://autoload/display.gd"
 
 [display]
 
+window/size/window_width_override=1600
+window/size/window_height_override=900
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

@@ -1,154 +1,148 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cnqbo6m8fw0kj"]
 
-[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1"]
+[ext_resource type="Script" uid="uid://blm1426jhk8xt" path="res://scenes/ui/main_menu.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/menu_card.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/ui/ink_panel.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://scenes/ui/callout.tscn" id="4"]
-[ext_resource type="Texture2D" path="res://art/customer/background.jpg" id="5"]
-[ext_resource type="FontFile" path="res://art/fonts/Supro-Regular.ttf" id="6"]
-[ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="7"]
-[ext_resource type="Texture2D" path="res://art/main_page/top_border.png" id="10"]
-[ext_resource type="Texture2D" path="res://art/main_page/top_fill.png" id="11"]
-[ext_resource type="Texture2D" path="res://art/main_page/mid_left_border.png" id="12"]
-[ext_resource type="Texture2D" path="res://art/main_page/mid_left_fill.png" id="13"]
-[ext_resource type="Texture2D" path="res://art/main_page/mid_middle_border.png" id="14"]
-[ext_resource type="Texture2D" path="res://art/main_page/mid_middle_fill.png" id="15"]
-[ext_resource type="Texture2D" path="res://art/main_page/mid_right_border.png" id="16"]
-[ext_resource type="Texture2D" path="res://art/main_page/mid_right_fill.png" id="17"]
-[ext_resource type="Texture2D" path="res://art/main_page/bot_left_border.png" id="18"]
-[ext_resource type="Texture2D" path="res://art/main_page/bot_left_fill.png" id="19"]
-[ext_resource type="Texture2D" path="res://art/main_page/bot_hex_border.png" id="20"]
-[ext_resource type="Texture2D" path="res://art/main_page/bot_hex_fill.png" id="21"]
-[ext_resource type="Texture2D" path="res://art/main_page/bot_right_border.png" id="22"]
-[ext_resource type="Texture2D" path="res://art/main_page/bot_right_fill.png" id="23"]
+[ext_resource type="Texture2D" uid="uid://m17n0tqa4cn" path="res://art/customer/background.jpg" id="5"]
+[ext_resource type="Texture2D" uid="uid://blv2c0xfw06xf" path="res://art/main_page/top_border.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://dnl3ycqoh3f5o" path="res://art/main_page/top_fill.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://bidr7vdxcogw7" path="res://art/main_page/mid_left_border.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://csc6tshputs1e" path="res://art/main_page/mid_left_fill.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://dffq1ye67qf2e" path="res://art/main_page/mid_middle_border.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://b843x8db5ryn" path="res://art/main_page/mid_middle_fill.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://btirid7ojfetr" path="res://art/main_page/mid_right_border.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://bjuhdi6hrbyv4" path="res://art/main_page/mid_right_fill.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://cdymx3tq8bty" path="res://art/main_page/bot_left_border.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://ctx00cuv8qchw" path="res://art/main_page/bot_left_fill.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://8l4itsl7cxh6" path="res://art/main_page/bot_hex_border.png" id="20"]
+[ext_resource type="Texture2D" uid="uid://dj7485el873as" path="res://art/main_page/bot_hex_fill.png" id="21"]
+[ext_resource type="Texture2D" uid="uid://c18ecyufp0yba" path="res://art/main_page/bot_right_border.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://b1h64am34fogi" path="res://art/main_page/bot_right_fill.png" id="23"]
 
-[node name="MainPage" type="Control"]
+[node name="MainPage" type="Control" unique_id=1336120583]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1443940128]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("5")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Rows" type="VBoxContainer" parent="."]
+[node name="Rows" type="VBoxContainer" parent="." unique_id=1915749932]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 18
 alignment = 1
 
-[node name="Top" parent="Rows" instance=ExtResource("3")]
+[node name="Top" parent="Rows" unique_id=827645282 instance=ExtResource("3")]
+custom_minimum_size = Vector2(1119.584, 188.574)
 layout_mode = 2
 size_flags_horizontal = 4
 border = ExtResource("10")
 fill = ExtResource("11")
 panel_scale = 0.593
 
-[node name="Content" parent="Rows/Top" index="2"]
-theme_override_constants/margin_left = 40
-theme_override_constants/margin_right = 40
-
-[node name="VBox" type="VBoxContainer" parent="Rows/Top/Content" index="0"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="ShopName" type="Label" parent="Rows/Top/Content/VBox" index="0"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0.094, 0.094, 0.094, 1)
-theme_override_constants/outline_size = 12
-theme_override_fonts/font = ExtResource("6")
-theme_override_font_sizes/font_size = 44
-text = "Hearthling Shop"
-horizontal_alignment = 1
-
-[node name="Status" type="Label" parent="Rows/Top/Content/VBox" index="1"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.094, 0.094, 0.094, 1)
-theme_override_fonts/font = ExtResource("7")
-theme_override_font_sizes/font_size = 24
-text = "Day 1    Mana 10 / 10    0 coin"
-horizontal_alignment = 1
-
-[node name="Middle" type="HBoxContainer" parent="Rows"]
+[node name="Middle" type="HBoxContainer" parent="Rows" unique_id=1430764834]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -20
 alignment = 1
 
-[node name="FrontDesk" parent="Rows/Middle" instance=ExtResource("2")]
+[node name="FrontDesk" parent="Rows/Middle" unique_id=714104233 instance=ExtResource("2")]
+custom_minimum_size = Vector2(379.52, 171.97)
 layout_mode = 2
-border = ExtResource("12")
-fill = ExtResource("13")
-panel_scale = 0.593
+mouse_filter = 0
 page = &"front_desk"
 title = "Front Desk"
 blurb = "Customers wait here with requests."
-
-[node name="Pens" parent="Rows/Middle" instance=ExtResource("2")]
-layout_mode = 2
-border = ExtResource("14")
-fill = ExtResource("15")
+border = ExtResource("12")
+fill = ExtResource("13")
 panel_scale = 0.593
+
+[node name="Pens" parent="Rows/Middle" unique_id=1026768245 instance=ExtResource("2")]
+custom_minimum_size = Vector2(398.496, 170.784)
+layout_mode = 2
+mouse_filter = 0
 page = &"pens"
 title = "Pens"
 blurb = "Feed and shape your Hearthlings each day."
-
-[node name="TrainingYard" parent="Rows/Middle" instance=ExtResource("2")]
-layout_mode = 2
-border = ExtResource("16")
-fill = ExtResource("17")
+border = ExtResource("14")
+fill = ExtResource("15")
 panel_scale = 0.593
+
+[node name="TrainingYard" parent="Rows/Middle" unique_id=416129511 instance=ExtResource("2")]
+custom_minimum_size = Vector2(379.52, 171.97)
+layout_mode = 2
+mouse_filter = 0
 page = &"training_yard"
 title = "Training Yard"
 blurb = "Train settled Hearthlings toward their caps."
+border = ExtResource("16")
+fill = ExtResource("17")
+panel_scale = 0.593
 
-[node name="Bottom" type="HBoxContainer" parent="Rows"]
+[node name="Bottom" type="HBoxContainer" parent="Rows" unique_id=498839167]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = -38
 alignment = 1
 
-[node name="Market" parent="Rows/Bottom" instance=ExtResource("2")]
+[node name="Market" parent="Rows/Bottom" unique_id=97789609 instance=ExtResource("2")]
+custom_minimum_size = Vector2(512.352, 189.76)
 layout_mode = 2
-border = ExtResource("18")
-fill = ExtResource("19")
-panel_scale = 0.593
+mouse_filter = 0
 page = &"market"
 title = "Market"
 blurb = "Buy eggs, food and materials."
-
-[node name="Gem" parent="Rows/Bottom" instance=ExtResource("2")]
-layout_mode = 2
-border = ExtResource("20")
-fill = ExtResource("21")
+border = ExtResource("18")
+fill = ExtResource("19")
 panel_scale = 0.593
+
+[node name="Gem" parent="Rows/Bottom" unique_id=808140995 instance=ExtResource("2")]
+custom_minimum_size = Vector2(170.784, 189.76)
+layout_mode = 2
+mouse_filter = 0
 page = &"gem"
 title = "Gem"
 blurb = "The shop's core: mana, avatars and growth."
-
-[node name="Ledger" parent="Rows/Bottom" instance=ExtResource("2")]
-layout_mode = 2
-border = ExtResource("22")
-fill = ExtResource("23")
+border = ExtResource("20")
+fill = ExtResource("21")
 panel_scale = 0.593
+
+[node name="Ledger" parent="Rows/Bottom" unique_id=171257680 instance=ExtResource("2")]
+custom_minimum_size = Vector2(512.352, 189.76)
+layout_mode = 2
+mouse_filter = 0
 page = &"ledger"
 title = "Ledger"
 blurb = "Active requests and your Hearthlings."
+border = ExtResource("22")
+fill = ExtResource("23")
+panel_scale = 0.593
 
-[node name="Callout" parent="." instance=ExtResource("4")]
+[node name="Callout" parent="." unique_id=1371840179 instance=ExtResource("4")]
 unique_name_in_owner = true
 visible = false
+custom_minimum_size = Vector2(246.40001, 193.6)
+layout_mode = 0
+offset_right = 246.40001
+offset_bottom = 193.6
+tip = Vector2(29, 115)
