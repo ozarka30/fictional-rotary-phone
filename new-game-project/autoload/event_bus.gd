@@ -23,10 +23,9 @@ signal task_completed(task: Resource, worker: Node)
 
 # Avatars and Hearthlings
 signal avatar_formed(avatar: Node)
-signal egg_received(egg: Resource)
-signal hearthling_hatched(h: Resource)
+signal heartseed_received(seed: Resource)
+signal hearthling_baked(h: Resource)
 signal hearthling_changed(h: Resource)
-signal hearthling_stabilized(h: Resource)
 
 # Customers and requests
 signal customer_arrived(customer: Node)

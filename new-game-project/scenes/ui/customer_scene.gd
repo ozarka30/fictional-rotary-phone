@@ -105,12 +105,12 @@ func _finish() -> void:
 	%CardTitle.text = "%s's request" % r.customer_name
 	%CardText.text = "%s\n\nNeeds: %s\nBack in %s  -  Reward: %s" % [r.summary, ", ".join(needs),
 		Ink.chip("%d days" % r.return_after_days, Types.DAYS_COLOR), Ink.chip("%d coin" % r.reward_coin, Types.COIN_COLOR)]
-	%Accept.text = "Take the egg" if r.egg else "Accept"
+	%Accept.text = "Take the Heartseed" if r.heartseed else "Accept"
 	%DialogBox.hide()
 	%RequestCard.show()
 
 
-## Returning customer: pick which settled Hearthling to hand over.
+## Returning customer: pick which Hearthling to hand over. Whatever is handed over is gone, Heartseed and all.
 func _offer_hearthlings() -> void:
 	for c in %Replies.get_children():
 		c.queue_free()
@@ -118,9 +118,7 @@ func _offer_hearthlings() -> void:
 	%Text.visible_ratio = 1.0
 	_choosing = true
 	for h: HearthlingData in GameState.hearthlings.values():
-		if h.stabilized:
-			var family: FamilyDef = Database.get_def(&"families", h.family_id)
-			_option("%s #%d" % [family.name, h.uid], _deliver.bind(h))
+		_option(h.name, _deliver.bind(h))
 	_option("Not ready yet", finished.emit)
 
 
@@ -130,11 +128,7 @@ func _deliver(h: HearthlingData) -> void:
 	var happy := Scoring.meets(h, r)
 	_active.fulfilled = true
 	_active.grade = stars
-	GameState.hearthlings.erase(h.uid)
-	for slots in GameState.yard_slots.values():
-		for i in slots.size():
-			if slots[i] == h.uid:
-				slots[i] = -1
+	GameState.hearthlings.erase(h.uid)  # ponytail: the rare chance it comes back isn't in yet
 	if happy:
 		GameState.add_coin(r.reward_coin)
 	EventBus.request_completed.emit(_active, stars)
@@ -155,7 +149,9 @@ func _accept() -> void:
 	GameState.active_requests.append(active)
 	GameState.waiting.erase(r)
 	EventBus.request_received.emit(active)
-	if r.egg:
-		GameState.eggs.append(r.egg)
-		EventBus.egg_received.emit(r.egg)
+	if r.heartseed:
+		var seed: Heartseed = r.heartseed.duplicate(true)
+		seed.uid = GameState.new_uid()
+		GameState.heartseeds.append(seed)
+		EventBus.heartseed_received.emit(seed)
 	finished.emit()

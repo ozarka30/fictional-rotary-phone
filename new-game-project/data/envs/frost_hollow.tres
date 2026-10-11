@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnvDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/env_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"frost_hollow"
+name = "Frost Hollow"
+stat_deltas = Dictionary[int, float]({2: 1.0})
+affinity_deltas = Dictionary[int, float]({2: 3.0, 3: -1.0})

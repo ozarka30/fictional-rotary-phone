@@ -1,31 +1,36 @@
 @tool
 class_name HearthlingData extends Resource
-## Everything about one Hearthling. Plain data; rules and components change it.
+## One baked Hearthling: a body (mold, dough, mix-ins) around a Heartseed.
+## What shows is the seed's exp, capped by the body.
 
 @export var uid: int
-@export var egg: EggDef
-@export var family_id: StringName
-@export var form_affinity := Types.Affinity.NONE  # set at stabilization
-@export var stabilized := false
-@export var malleable_days_left := 0
-
-@export var stats: Dictionary[Types.Stat, float] = {}
-@export var potentials: Dictionary[Types.Stat, float] = {}
-@export var affinities: Dictionary[Types.Affinity, float] = {}
-@export var conditions: Array[StringName] = []
-@export var traits: Array[StringName] = []
-@export var skills: Array[StringName] = []
-@export var quality := Types.Grade.E
-
-@export var pen_id: StringName
-@export var fed_today := false
-@export var idle_streak := 0
-@export var history: Array[DayEntry] = []  # food and pen per day; becomes the recipe later
+@export var name: String
+@export var mold: MoldDef
+@export var doughs: Array[DoughDef] = []
+@export var mixins: Array[MixinDef] = []
+@export var seed: Heartseed
+@export var stat_caps: Dictionary[Types.Stat, float] = {}
+@export var affinity_caps: Dictionary[Types.Affinity, float] = {}
+@export var toxicity := 0.0
+@export var env_id: StringName       # Training Yard environment, empty = not training
+@export var activity_id: StringName  # what it does there, empty = just the environment
 
 
-func stat_grade(stat: Types.Stat) -> Types.Grade:
-	return Types.grade_of(stats.get(stat, 0.0))
+func stat(s: Types.Stat) -> float:
+	return minf(seed.stat_exp.get(s, 0.0), stat_caps.get(s, 0.0))
 
 
-func affinity_grade(affinity: Types.Affinity) -> Types.Grade:
-	return Types.grade_of(affinities.get(affinity, 0.0))
+func affinity(a: Types.Affinity) -> float:
+	return minf(seed.affinity_exp.get(a, 0.0), affinity_caps.get(a, 0.0))
+
+
+func stat_grade(s: Types.Stat) -> Types.Grade:
+	return Types.grade_of(stat(s))
+
+
+func affinity_grade(a: Types.Affinity) -> Types.Grade:
+	return Types.grade_of(affinity(a))
+
+
+func traits() -> Array[StringName]:
+	return mold.traits + seed.traits

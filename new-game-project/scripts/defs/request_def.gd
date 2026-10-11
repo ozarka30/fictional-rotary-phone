@@ -8,7 +8,7 @@ class_name RequestDef extends Resource
 @export_multiline var summary: String
 @export var min_stats: Dictionary[Types.Stat, Types.Grade] = {}
 @export var min_affinities: Dictionary[Types.Affinity, Types.Grade] = {}
-@export var egg: EggDef                 # egg the customer hands over, if any
+@export var heartseed: Heartseed        # Heartseed the customer hands over, if any
 @export var return_after_days := 5
 @export var reward_coin := 0
 @export var reward_materials: Dictionary[StringName, int] = {}

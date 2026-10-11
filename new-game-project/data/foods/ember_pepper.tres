@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FoodDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/food_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"ember_pepper"
+name = "Ember Pepper"
+cost = 3
+affinity_deltas = Dictionary[int, float]({1: 4.0, 2: -3.0})
+toxicity = 30.0

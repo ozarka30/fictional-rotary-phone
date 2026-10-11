@@ -1,16 +1,18 @@
 extends Control
-## Market: rows of shop boxes, one per thing for sale (every food and egg def for now).
+## Market: rows of shop boxes, one per thing for sale (every mold, dough, mix-in, food and Heartseed def for now).
 
 const ITEM := preload("res://scenes/ui/shop_item.tscn")
-const STOCK := [&"eggs", &"foods"]  # ponytail: everything is always in stock; vendors and levels later
+const STOCK := [&"molds", &"doughs", &"mixins", &"foods", &"seeds"]  # ponytail: everything is always in stock; vendors and levels later
 
 
 func _ready() -> void:
 	for category in STOCK:
 		for def in Database.get_all(category):
+			if def is MoldDef and def.cost == 0:
+				continue  # starter molds aren't sold
 			var box: ShopItem = ITEM.instantiate()
 			box.item = def
-			box.blurb = _blurb(def)
+			box.blurb = Ink.effects(def)
 			box.pressed.connect(func(_p): _buy(box))
 			box.mouse_entered.connect(func(): %Callout.say(box.blurb, box.global_position + Vector2(box.size.x * 0.5, 8)))
 			box.mouse_exited.connect(%Callout.hide)
@@ -21,29 +23,24 @@ func _ready() -> void:
 
 func _buy(box: ShopItem) -> void:
 	var def: Resource = box.item
+	var at := box.global_position + Vector2(box.size.x * 0.5, 8)
+	if def is MoldDef and GameState.molds.get(def.id, 0) == -1:
+		%Callout.say("You already own this mold.", at)
+		return
 	if GameState.coin < def.cost:
-		%Callout.say("Not enough coin.", box.global_position + Vector2(box.size.x * 0.5, 8))
+		%Callout.say("Not enough coin.", at)
 		return
 	GameState.add_coin(-def.cost)
-	if def is EggDef:
-		GameState.eggs.append(def)
+	if def is MoldDef:
+		GameState.molds[def.id] = def.uses if def.uses < 0 else GameState.molds.get(def.id, 0) + def.uses
+	elif def is Heartseed:
+		var seed: Heartseed = def.duplicate(true)
+		seed.uid = GameState.new_uid()
+		GameState.heartseeds.append(seed)
 	else:
-		GameState.add_material(def.id, 1)  # ponytail: food sits in materials until feeding costs stock
-	%Callout.say("Bought %s!" % def.name, box.global_position + Vector2(box.size.x * 0.5, 8))
+		GameState.add_material(def.id, 1)
+	%Callout.say("Bought %s!" % def.name, at)
 
 
 func _refresh() -> void:
 	%Subtitle.text = "%d coin" % GameState.coin
-
-
-func _blurb(def: Resource) -> String:
-	if def is EggDef:
-		return "Grade %s egg. %s" % [Ink.grade(def.grade, "", 20), Ink.chip("%d shaping days" % def.malleable_days, Types.DAYS_COLOR)]
-	var bits := PackedStringArray()
-	for a in def.affinity_deltas:
-		bits.append(Ink.chip("+%d %s" % [def.affinity_deltas[a], Types.Affinity.keys()[a].capitalize()], Types.AFFINITY_COLORS[a]))
-	for s in def.potential_deltas:
-		bits.append(Ink.chip("+%d %s cap" % [def.potential_deltas[s], Types.Stat.keys()[s].capitalize()], Types.STAT_COLORS[s]))
-	for s in def.stat_deltas:
-		bits.append(Ink.chip("+%d %s" % [def.stat_deltas[s], Types.Stat.keys()[s].capitalize()], Types.STAT_COLORS[s]))
-	return ", ".join(bits)

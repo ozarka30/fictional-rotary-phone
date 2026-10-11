@@ -4,7 +4,7 @@ extends Node
 const PAGES := {
 	&"home": "res://scenes/ui/main_page.tscn",
 	&"front_desk": "res://scenes/ui/front_desk_page.tscn",
-	&"pens": "res://scenes/ui/pens_page.tscn",
+	&"bake": "res://scenes/ui/bake_page.tscn",
 	&"training_yard": "res://scenes/ui/training_yard_page.tscn",
 	&"market": "res://scenes/ui/market_page.tscn",
 	&"ledger": "res://scenes/ui/ledger_page.tscn",

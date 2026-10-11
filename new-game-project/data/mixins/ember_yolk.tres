@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MixinDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/mixin_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"ember_yolk"
+name = "Ember Yolk"
+cost = 30
+rare = true
+affinity_caps = Dictionary[int, float]({1: 15.0})

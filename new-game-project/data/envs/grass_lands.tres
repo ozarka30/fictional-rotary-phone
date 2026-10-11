@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EnvDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/env_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"grass_lands"
+name = "Grass Lands"
+stat_deltas = Dictionary[int, float]({4: 1.0})
+affinity_deltas = Dictionary[int, float]({3: 3.0, 1: -1.0})

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MoldDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/mold_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"pup"
+name = "Pup Mold"
+creature_name = "Pup"
+cost = 0
+dough_slots = 2
+mixin_slots = 1
+stat_caps = Dictionary[int, float]({0: 40.0, 1: 50.0, 2: 40.0, 3: 40.0, 4: 50.0, 5: 50.0})
+traits = Array[StringName]([&"playful"])

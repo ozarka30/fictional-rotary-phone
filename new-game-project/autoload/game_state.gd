@@ -2,14 +2,15 @@ extends Node
 ## Shared run state. Systems read and change it; the HUD listens via EventBus.
 
 var day := 1
-var coin := 0
-var materials := {}            # StringName -> int
+var coin := 20
+var materials := {&"brine_dough": 2, &"plain_dough": 2}  # dough, mix-in and food id -> count
+var molds := {&"pup": -1}      # mold id -> uses left, -1 = unlimited
 var hearthlings := {}          # uid -> HearthlingData
 var active_requests: Array = []  # ActiveRequest
 var waiting: Array = [preload("res://data/requests/hunter_tracker.tres")]  # new customers at the desk, in order
-var eggs: Array = []           # EggDef, not yet hatched
+var heartseeds: Array = []     # Heartseed not in a body, ready to bake
 var tutorial_flags := {}       # StringName -> bool
-var yard_slots := {}           # yard id -> Array of 5 Hearthling uids (-1 = empty)
+var env_activities := {}       # Training Yard environment id -> Array of installed activity ids (&"" = empty slot)
 
 var mana_capacity := 10        # ponytail: placeholder, tune with the tutorial costs
 var _mana_locks := {}          # owner_id -> amount

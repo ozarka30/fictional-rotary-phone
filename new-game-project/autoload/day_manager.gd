@@ -1,5 +1,5 @@
 extends Node
-## Ending the day: training for settled Hearthlings, then shaping (pen push, settling), then the next morning.
+## Ending the day: every Hearthling in a Training Yard environment trains, then the next morning.
 
 
 func _ready() -> void:
@@ -9,15 +9,13 @@ func _ready() -> void:
 func sleep() -> void:
 	EventBus.day_ending.emit(GameState.day)
 	var notes := PackedStringArray()
-	# training first: a Hearthling that settles tonight starts training tomorrow night
-	for yard in Training.YARDS:
-		for uid in GameState.yard_slots.get(yard.id, []):
-			if GameState.hearthlings.has(uid):
-				Training.train(GameState.hearthlings[uid], yard.stats)
+	var trained := 0
 	for h: HearthlingData in GameState.hearthlings.values():
-		if Shaping.end_day(h, Database.get_def(&"pens", h.pen_id)):
-			notes.append("#%d has settled" % h.uid)
-			EventBus.hearthling_stabilized.emit(h)
+		if h.env_id:
+			Training.night(h, Database.get_def(&"envs", h.env_id), Database.get_def(&"activities", h.activity_id) if h.activity_id else null)
+			trained += 1
+	if trained:
+		notes.append("%d Hearthling(s) trained overnight" % trained)
 	GameState.day += 1
 	for a in GameState.active_requests:
 		if not a.fulfilled and a.due_day == GameState.day:

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DoughDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/dough_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"mud_dough"
+name = "Mud Dough"
+cost = 5
+affinity_caps = Dictionary[int, float]({4: 30.0, 2: 10.0})

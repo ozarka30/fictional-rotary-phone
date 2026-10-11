@@ -108,13 +108,13 @@ border = ExtResource("12")
 fill = ExtResource("13")
 panel_scale = 0.593
 
-[node name="Pens" parent="Rows/Middle" unique_id=1026768245 instance=ExtResource("2")]
+[node name="Bake" parent="Rows/Middle" unique_id=1026768245 instance=ExtResource("2")]
 custom_minimum_size = Vector2(398.496, 170.784)
 layout_mode = 2
 mouse_filter = 0
-page = &"pens"
-title = "Pens"
-blurb = "Feed and shape your Hearthlings each day."
+page = &"bake"
+title = "Bake"
+blurb = "Bake a new Hearthling from a mold, dough, mix-ins and a Heartseed."
 border = ExtResource("14")
 fill = ExtResource("15")
 panel_scale = 0.593
@@ -125,7 +125,7 @@ layout_mode = 2
 mouse_filter = 0
 page = &"training_yard"
 title = "Training Yard"
-blurb = "Train settled Hearthlings toward their caps."
+blurb = "Place Hearthlings in environments, install activities, and feed them."
 border = ExtResource("16")
 fill = ExtResource("17")
 panel_scale = 0.593
@@ -142,7 +142,7 @@ layout_mode = 2
 mouse_filter = 0
 page = &"market"
 title = "Market"
-blurb = "Buy eggs, food and materials."
+blurb = "Buy molds, dough, mix-ins, food and Heartseeds."
 border = ExtResource("18")
 fill = ExtResource("19")
 panel_scale = 0.593
