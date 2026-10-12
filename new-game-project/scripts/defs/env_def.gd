@@ -1,6 +1,5 @@
 @tool
 class_name EnvDef extends ActivityDef
-## A Training Yard environment: its own nightly effect, plus room for creatures and activities.
+## A Training Yard environment: its own nightly effect, and slots that each hold one creature (and maybe a machine).
 
-@export var creature_slots := 3
-@export var activity_slots := 2
+@export var slots := 5

@@ -12,8 +12,6 @@ class_name HearthlingData extends Resource
 @export var stat_caps: Dictionary[Types.Stat, float] = {}
 @export var affinity_caps: Dictionary[Types.Affinity, float] = {}
 @export var toxicity := 0.0
-@export var env_id: StringName       # Training Yard environment, empty = not training
-@export var activity_id: StringName  # what it does there, empty = just the environment
 
 
 func stat(s: Types.Stat) -> float:

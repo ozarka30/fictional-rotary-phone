@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ActivityDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/defs/activity_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"romp"
+name = "Romp"
+stat_deltas = Dictionary[int, float]({1: 4.0, 0: 2.0, 3: -1.0})

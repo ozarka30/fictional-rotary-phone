@@ -1,6 +1,7 @@
 extends SlotPage
-## Training Yard: four environments. Each has activity slots (first) and creature slots (after).
-## Each night a creature here gets the environment's effect plus its activity's. Food is fed here too.
+## Training Yard: four environments, each with slots that hold one Hearthling.
+## A slot can also have a training machine installed; the machine becomes an extra activity for that slot.
+## Each night a Hearthling gets the environment's effect plus its activity's. Food is fed here too.
 
 
 func options() -> Array:
@@ -9,83 +10,82 @@ func options() -> Array:
 
 
 func slot(option: Dictionary, i: int) -> Dictionary:
-	var env: EnvDef = option.env
-	if i < env.activity_slots:
-		var act_id: StringName = _activities(env)[i]
-		if not act_id:
-			return {"title": "+ Activity", "blurb": "Click to install an activity."}
-		var act: ActivityDef = Database.get_def(&"activities", act_id)
-		return {"title": act.name, "blurb": "%s\nClick to remove it." % Ink.effects(act)}
-	var here := _here(env)
-	var k := i - env.activity_slots
-	if k >= here.size():
-		return {"title": "Empty", "blurb": "Click to place a Hearthling here."}
-	var h: HearthlingData = here[k]
-	var doing: String = Database.get_def(&"activities", h.activity_id).name if h.activity_id else "Resting"
-	return {"title": h.name, "blurb": doing, "uid": h.uid}
+	var s: Dictionary = GameState.slots(option.env)[i]
+	var machine := ("\nMachine: %s" % _act(s.machine).name) if s.machine else ""
+	if not GameState.hearthlings.has(s.uid):
+		return {"title": "Empty", "blurb": "Click to place a Hearthling or install a machine.%s" % machine}
+	var doing: String = _act(s.activity).name if s.activity else "Resting"
+	return {"title": GameState.hearthlings[s.uid].name, "blurb": doing + machine, "uid": s.uid}
 
 
 func slot_pressed(option: Dictionary, i: int) -> void:
-	var env: EnvDef = option.env
-	if i < env.activity_slots:
-		await _activity_slot(env, i)
+	var s: Dictionary = GameState.slots(option.env)[i]
+	if GameState.hearthlings.has(s.uid):
+		await _creature(s, GameState.hearthlings[s.uid])
 	else:
-		var here := _here(env)
-		var k := i - env.activity_slots
-		if k < here.size():
-			await _creature(env, here[k])
-		else:
-			await _place(env)
+		var labels := PackedStringArray(["Place a Hearthling", "Remove machine" if s.machine else "Install a machine"])
+		var pick: int = await %Chooser.ask(option.name, labels)
+		match pick:
+			0: await _place(s)
+			1: await _machine(s)
 	select(_sel)
 
 
-func _activity_slot(env: EnvDef, i: int) -> void:
-	var acts := _activities(env)
-	if acts[i]:
-		for h in _here(env):
-			if h.activity_id == acts[i]:
-				h.activity_id = &""
-		acts[i] = &""
-		return
-	var all := Database.get_all(&"activities").filter(func(a): return not acts.has(a.id))
-	var pick: int = await %Chooser.ask("Install in %s" % env.name, PackedStringArray(all.map(func(a): return a.name)))
-	if pick >= 0:
-		acts[i] = all[pick].id
-
-
-func _place(env: EnvDef) -> void:
-	var free := GameState.hearthlings.values().filter(func(h): return not h.env_id)
+func _place(s: Dictionary) -> void:
+	var free := GameState.hearthlings.values().filter(func(h): return GameState.slot_of(h.uid).is_empty())
 	if free.is_empty():
 		%Callout.say("No free Hearthlings. Bake one first.", get_viewport().get_mouse_position())
 		return
-	var pick: int = await %Chooser.ask(env.name, PackedStringArray(free.map(func(h): return h.name)))
-	if pick < 0:
+	var pick: int = await %Chooser.ask("Who trains here?", PackedStringArray(free.map(func(h): return h.name)))
+	if pick >= 0:
+		s.uid = free[pick].uid
+		await _choose_activity(s, free[pick])
+
+
+## Install a machine you own into this slot, or take the installed one back out.
+func _machine(s: Dictionary) -> void:
+	if s.machine:
+		GameState.add_material(s.machine, 1)
+		if s.activity == s.machine:
+			s.activity = &""
+		s.machine = &""
 		return
-	free[pick].env_id = env.id
-	await _choose_activity(env, free[pick])
+	var owned := Database.get_all(&"activities").filter(func(a): return a.machine and GameState.materials.get(a.id, 0) > 0)
+	if owned.is_empty():
+		%Callout.say("No training machines. Buy them at the Market.", get_viewport().get_mouse_position())
+		return
+	var pick: int = await %Chooser.ask("Install a machine", PackedStringArray(owned.map(func(a): return "%s  -  %s" % [a.name, Ink.plain(Ink.effects(a))])))
+	if pick >= 0:
+		s.machine = owned[pick].id
+		GameState.add_material(s.machine, -1)
 
 
-func _creature(env: EnvDef, h: HearthlingData) -> void:
-	var pick: int = await %Chooser.ask(h.name, PackedStringArray(["Change activity", "Feed", "Take out", "Remold (keeps %d%% of its exp)" % (Baking.REMOLD_KEEP * 100)]))
+func _creature(s: Dictionary, h: HearthlingData) -> void:
+	var labels := PackedStringArray(["Change activity", "Feed", "Take out", "Remold (keeps %d%% of its exp)" % (Baking.REMOLD_KEEP * 100),
+		"Remove machine" if s.machine else "Install a machine"])
+	var pick: int = await %Chooser.ask(h.name, labels)
 	match pick:
-		0: await _choose_activity(env, h)
+		0: await _choose_activity(s, h)
 		1: await _feed(h)
 		2:
-			h.env_id = &""
-			h.activity_id = &""
+			s.uid = -1
+			s.activity = &""
 		3:
-			GameState.hearthlings.erase(h.uid)
+			GameState.remove_hearthling(h.uid)
+			s.activity = &""
 			GameState.heartseeds.append(Baking.remold(h))
 			%Callout.say("Its Heartseed is back on the bake shelf.", get_viewport().get_mouse_position())
+		4: await _machine(s)
 
 
-func _choose_activity(env: EnvDef, h: HearthlingData) -> void:
-	var acts := _activities(env).filter(func(a): return a)
+## Basic activities, plus this slot's machine if one is installed.
+func _choose_activity(s: Dictionary, h: HearthlingData) -> void:
+	var acts := Database.get_all(&"activities").filter(func(a): return not a.machine or a.id == s.machine)
 	var labels := PackedStringArray(["Rest (environment only)"])
-	labels.append_array(acts.map(func(a): return Database.get_def(&"activities", a).name))
+	labels.append_array(acts.map(func(a): return ("[Machine] " if a.machine else "") + "%s  -  %s" % [a.name, Ink.plain(Ink.effects(a))]))
 	var pick: int = await %Chooser.ask("What should %s do?" % h.name, labels)
 	if pick >= 0:
-		h.activity_id = &"" if pick == 0 else acts[pick - 1]
+		s.activity = &"" if pick == 0 else acts[pick - 1].id
 
 
 func _feed(h: HearthlingData) -> void:
@@ -97,18 +97,11 @@ func _feed(h: HearthlingData) -> void:
 		%Callout.say("No food. Buy some at the Market.", get_viewport().get_mouse_position())
 		return
 	var pick: int = await %Chooser.ask("Feed %s (toxicity %d/%d)" % [h.name, h.toxicity, Training.TOXICITY_MAX],
-		PackedStringArray(foods.map(func(f): return "%s x%d  (+%d tox)" % [f.name, GameState.materials[f.id], f.toxicity])))
+		PackedStringArray(foods.map(func(f): return "%s x%d  -  %s" % [f.name, GameState.materials[f.id], Ink.plain(Ink.effects(f))])))
 	if pick >= 0:
 		Training.feed(h, foods[pick])
 		GameState.add_material(foods[pick].id, -1)
 
 
-func _activities(env: EnvDef) -> Array:
-	var empty := []
-	empty.resize(env.activity_slots)
-	empty.fill(&"")
-	return GameState.env_activities.get_or_add(env.id, empty)
-
-
-func _here(env: EnvDef) -> Array:
-	return GameState.hearthlings.values().filter(func(h): return h.env_id == env.id)
+func _act(id: StringName) -> ActivityDef:
+	return Database.get_def(&"activities", id)

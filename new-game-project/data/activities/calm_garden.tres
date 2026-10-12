@@ -5,5 +5,7 @@
 [resource]
 script = ExtResource("1")
 id = &"calm_garden"
+cost = 20
+machine = true
 name = "Calm Garden"
 stat_deltas = Dictionary[int, float]({4: 10.0, 3: 4.0, 0: -2.0})

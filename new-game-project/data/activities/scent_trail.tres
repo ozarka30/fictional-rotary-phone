@@ -5,5 +5,7 @@
 [resource]
 script = ExtResource("1")
 id = &"scent_trail"
+cost = 20
+machine = true
 name = "Scent Trail"
 stat_deltas = Dictionary[int, float]({5: 10.0, 3: 4.0, 4: -2.0})

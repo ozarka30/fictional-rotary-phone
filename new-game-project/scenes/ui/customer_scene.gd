@@ -128,7 +128,7 @@ func _deliver(h: HearthlingData) -> void:
 	var happy := Scoring.meets(h, r)
 	_active.fulfilled = true
 	_active.grade = stars
-	GameState.hearthlings.erase(h.uid)  # ponytail: the rare chance it comes back isn't in yet
+	GameState.remove_hearthling(h.uid)  # ponytail: the rare chance it comes back isn't in yet
 	if happy:
 		GameState.add_coin(r.reward_coin)
 	EventBus.request_completed.emit(_active, stars)

@@ -5,5 +5,7 @@
 [resource]
 script = ExtResource("1")
 id = &"sparring_ring"
+cost = 20
+machine = true
 name = "Sparring Ring"
 stat_deltas = Dictionary[int, float]({0: 10.0, 2: 4.0, 4: -3.0})

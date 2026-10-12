@@ -1,15 +1,15 @@
 extends Control
-## Market: rows of shop boxes, one per thing for sale (every mold, dough, mix-in, food and Heartseed def for now).
+## Market: rows of shop boxes, one per thing for sale (molds, dough, mix-ins, food, training machines, Heartseeds).
 
 const ITEM := preload("res://scenes/ui/shop_item.tscn")
-const STOCK := [&"molds", &"doughs", &"mixins", &"foods", &"seeds"]  # ponytail: everything is always in stock; vendors and levels later
+const STOCK := [&"molds", &"doughs", &"mixins", &"foods", &"activities", &"seeds"]  # ponytail: everything is always in stock; vendors and levels later
 
 
 func _ready() -> void:
 	for category in STOCK:
 		for def in Database.get_all(category):
-			if def is MoldDef and def.cost == 0:
-				continue  # starter molds aren't sold
+			if (def is MoldDef and def.cost == 0) or (def is ActivityDef and not def.machine):
+				continue  # starter molds and basic activities aren't sold
 			var box: ShopItem = ITEM.instantiate()
 			box.item = def
 			box.blurb = Ink.effects(def)

@@ -31,7 +31,7 @@ static func today() -> String:
 		bits.append("%s is waiting at the desk" % GameState.waiting[0].customer_name)
 	if GameState.heartseeds:
 		bits.append("%d Heartseed(s) ready to bake" % GameState.heartseeds.size())
-	var idle := GameState.hearthlings.values().filter(func(h): return not h.env_id).size()
+	var idle := GameState.hearthlings.values().filter(func(h): return GameState.slot_of(h.uid).is_empty()).size()
 	if idle:
 		bits.append("%d Hearthling(s) not training" % idle)
 	return "   -   ".join(bits) if bits else "All caught up. Sleep when you're ready."
