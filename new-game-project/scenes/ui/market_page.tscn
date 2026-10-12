@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" path="res://art/fonts/Supro-Regular.ttf" id="9"]
 [ext_resource type="FontFile" path="res://art/fonts/Inklo-Regular.ttf" id="10"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud_bar.tscn" id="hud"]
+[ext_resource type="Theme" path="res://art/ui/comic_theme.tres" id="theme"]
 
 [node name="MarketPage" type="Control"]
 layout_mode = 3
@@ -72,10 +73,22 @@ theme_override_font_sizes/font_size = 26
 text = "Yard"
 horizontal_alignment = 1
 
-[node name="Grid" type="GridContainer" parent="Rows"]
+[node name="Tabs" type="HBoxContainer" parent="Rows"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("theme")
+theme_override_constants/separation = 10
+
+[node name="Scroll" type="ScrollContainer" parent="Rows"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Grid" type="GridContainer" parent="Rows/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
 mouse_filter = 2
 theme_override_constants/h_separation = 14
 theme_override_constants/v_separation = 14
